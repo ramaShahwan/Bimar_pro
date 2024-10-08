@@ -11,7 +11,9 @@ use App\Models\Bimar_Course_Enrollment;
 class Bimar_Training_Year extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'tr_year_id'; 
+    public $incrementing = true; 
+    protected $keyType = 'int';
       // protected $guarded=[];
       protected $fillable = ['tr_year_name', 'tr_year', 'tr_year_start_date', 
       'tr_year_end_date', 'tr_year_status','tr_year_desc'];

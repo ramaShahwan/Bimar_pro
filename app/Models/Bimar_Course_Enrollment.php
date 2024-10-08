@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Bimar_Course_Enrollment extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'tr_course_enrol_id'; 
+    public $incrementing = true; 
+    protected $keyType = 'int';
       // protected $guarded=[];
       protected $fillable = ['tr_course_enrol_program_id', 'tr_course_enrol_course_id', 'tr_course_enrol_year_id', 
       'tr_course_enrol_arrangement', 'tr_course_enrol_discount','tr_course_enrol_desc','tr_course_enrol_reg_start_date',

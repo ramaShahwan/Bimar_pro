@@ -11,6 +11,9 @@ use App\Models\Bimar_Course_Enrollment;
 class Bimar_Training_Course extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'tr_course_id'; 
+    public $incrementing = true; 
+    protected $keyType = 'int';
      // protected $guarded=[];
      protected $fillable = ['tr_course_code', 'tr_course_name_en', 'tr_course_name_ar', 
      'tr_course_img', 'tr_course_program_id','tr_course_desc','tr_course_status','tr_is_diploma'];

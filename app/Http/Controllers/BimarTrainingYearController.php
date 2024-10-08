@@ -11,7 +11,7 @@ class BimarTrainingYearController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    { 
+    {
          $data = Bimar_Training_Year::all();
          return view('admin.year',compact('data'));
     }
@@ -22,7 +22,7 @@ class BimarTrainingYearController extends Controller
     public function create()
     {
         return view('admin.addyear');
- 
+
     }
 
     /**
@@ -46,7 +46,7 @@ class BimarTrainingYearController extends Controller
         $data->tr_year_desc = $request->tr_year_desc;
         $data->save();
 
-     return redirect()->back()->with('message','تم الإضافة');   
+     return redirect()->back()->with('message','تم الإضافة');
     }
 
     /**
@@ -60,35 +60,48 @@ class BimarTrainingYearController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( $id)
+    public function edit($tr_year_id)
     {
-        $data = Bimar_Training_Year::findOrFail($id);
-        return view('admin.updateyear', compact('data'));
+        $data = Bimar_Training_Year::findOrFail($tr_year_id);
+        return response()->json($data); // يجب أن تحتوي على `tr_year_status`
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $tr_year_id)
     {
-        $validated = $request->validate([
-            'tr_year_name' => 'required',
-            'tr_year' => 'required',
-            'tr_year_start_date' => 'required',
-            'tr_year_end_date' => 'required',
-          ]);
+        try {
+            $validated = $request->validate([
+                'tr_year_name' => 'required',
+                'tr_year' => 'required',
+                'tr_year_start_date' => 'required|date',
+                'tr_year_end_date' => 'required|date',
+                'tr_year_status' => 'required|in:0,1', // التحقق من القيمة
+            ]);
 
-       $data = Bimar_Training_Year::findOrFail($id);
-       $data->tr_year_name = $request->tr_year_name;
-       $data->tr_year = $request->tr_year;
-       $data->tr_year_start_date = $request->tr_year_start_date;
-       $data->tr_year_end_date = $request->tr_year_end_date;
-       $data->tr_year_status = $request->tr_year_status;
-       $data->tr_year_desc = $request->tr_year_desc;
-       $data->update();
+            // التأكد من الحصول على السجل الصحيح
+            $data = Bimar_Training_Year::findOrFail($tr_year_id);
+            // تحديث البيانات
+            $data->tr_year_name = $request->tr_year_name;
+            $data->tr_year = $request->tr_year;
+            $data->tr_year_start_date = $request->tr_year_start_date;
+            $data->tr_year_end_date = $request->tr_year_end_date;
+            $data->tr_year_status = $request->tr_year_status; // تحديث الحالة
+            $data->tr_year_desc = $request->tr_year_desc;
+            $data->save();
 
-      return redirect()->back()->with('message','تم التعديل');
+            return response()->json(['message' => 'تم التعديل بنجاح'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
+
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -97,18 +110,40 @@ class BimarTrainingYearController extends Controller
     {
         //
     }
-
     public function updateSwitchStatus(Request $request, $id)
     {
         $data = Bimar_Training_Year::find($id);
 
         if ($data) {
-            $data->tr_year_status = $request->tr_year_status;
-            $data->save();
+            // تحديث حالة "tr_year_status" بناءً على القيمة المرسلة
+            $data->tr_year_status = $request->input('tr_year_status');
+            $data->save();  // تأكد من الحفظ في قاعدة البيانات
 
             return response()->json(['success' => true, 'message' => 'Status updated successfully']);
         } else {
             return response()->json(['success' => false, 'message' => 'Item not found'], 404);
         }
     }
+    public function updateSwitch($yearId)
+    {
+        $year = Bimar_Training_Year::find($yearId);
+        if($year){
+            if($year->tr_year_status){
+                $year->tr_year_status =0;
+            }
+            else{
+                $year->tr_year_status =1;
+            }
+            $year->save();
+        }
+        return back();
+
+    }
+
+
+
+
+
+
+
 }

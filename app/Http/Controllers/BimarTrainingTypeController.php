@@ -13,7 +13,22 @@ class BimarTrainingTypeController extends Controller
     public function index()
     {
         $data = bimar_training_type::all();
-        return view('admin.type',compact('data'));
+        return view('admin.training_type',compact('data'));
+    }
+    public function updateSwitch($typeId)
+    {
+        $type = bimar_training_type::find($typeId);
+        if($type){
+            if($type->tr_type_status){
+                $type->tr_type_status =0;
+            }
+            else{
+                $type->tr_type_status =1;
+            }
+            $type->save();
+        }
+        return back();
+
     }
 
     /**
@@ -55,29 +70,30 @@ class BimarTrainingTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit($tr_type_id)
     {
-        $data = Bimar_Training_Type::findOrFail($id);
-        return view('admin.updatetype', compact('data'));
+        $data = Bimar_Training_Type::findOrFail($tr_type_id);
+        return response()->json($data);
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $tr_type_id)
     {
         $validated = $request->validate([
             'tr_type_name_en' => 'required',
             'tr_type_name_ar' => 'required',
-          ]);
+        ]);
 
-       $data = Bimar_Training_Type::findOrFail($id);
-       $data->tr_type_name_en = $request->tr_type_name_en;
-       $data->tr_type_name_ar = $request->tr_type_name_ar;
-       $data->tr_type_status = $request->tr_type_status;
-       $data->update();
+        $data = Bimar_Training_Type::findOrFail($tr_type_id);
+        $data->tr_type_name_en = $request->tr_type_name_en;
+        $data->tr_type_name_ar = $request->tr_type_name_ar;
+        $data->tr_type_status = $request->tr_type_status;
+        $data->update();
 
-      return redirect()->back()->with('message','تم التعديل');
+        return response()->json(['message' => 'تم التعديل بنجاح']);
     }
 
     /**
