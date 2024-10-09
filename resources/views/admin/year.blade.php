@@ -511,70 +511,63 @@ input:checked + label:active {
             </div>
         </div>
         <div class="popupp" id="popuppo-1">
-            <div class="overlayy"></div>
-            <div class="contentt">
-                <div class="close-btn" onclick="togglePopuoo()">&times;</div>
-                <!-- <div class="containerr"> -->
-                <form id="editForm" onsubmit="updateYear(event, {{ $call->tr_year_id }})">
-             @csrf
-               <input type="hidden" name="tr_year_id" value="{{ $call->tr_year_id }}">
+    <div class="overlayy"></div>
+    <div class="contentt">
+        <div class="close-btn" onclick="togglePopuoo()">&times;</div>
+        @if(isset($call))
+        <form id="editForm" onsubmit="updateYear(event, {{ $call->tr_year_id }})">
+            @csrf
+            <input type="hidden" name="tr_year_id" value="{{ $call->tr_year_id }}">
 
+            <div class="roww">
+                <h4>تعديل السنة</h4>
+                <div class="input-groupp input-groupp-icon">
+                    <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                    <input type="text" id="tr_year_name" name="tr_year_name" value="{{ $call->tr_year_name }}">
+                </div>
 
-                      <div class="roww">
-                        <h4 > تعديل السنة</h4>
-                        <div class="input-groupp input-groupp-icon">
-                            <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          <!-- <input type="text" name="tr_year_name" id="tr_year_name"  /> -->
-                          <input type="text" id="tr_year_name" name="tr_year_name" value="{{ $call->tr_year_name }}">
+                <div class="input-groupp input-groupp-icon">
+                    <input type="number" name="tr_year" id="tr_year" value="{{ $call->tr_year }}"/>
+                    <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                </div>
 
+                <div class="input-groupp input-groupp-icon">
+                    <input type="date" name="tr_year_start_date" id="tr_year_start_date" placeholder="تاريخ بداية السنة" style="padding-bottom: 0;" value="{{ $call->tr_year_start_date }}"/>
+                    <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                </div>
 
-                        </div>
-                        <div class="input-groupp input-groupp-icon">
-                          <input type="number" name="tr_year"  id="tr_year" value="{{ $call->tr_year }}"/>
-                          <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                        </div>
-                        <div class="input-groupp input-groupp-icon">
-                          <input type="date" name="tr_year_start_date"  id="tr_year_start_date" placeholder="تاريخ بداية السنة" style="padding-bottom: 0;" value="{{ $call->tr_year_start_date }}"/>
-                          <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                        </div>
-                        <div class="input-groupp input-groupp-icon">
-                            <input type="date" name="tr_year_end_date"  id="tr_year_end_date" placeholder="تاريخ نهاية السنة" style="padding-bottom: 0;" value="{{ $call->tr_year_end_date }}"/>
-                            <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                          </div>
-                      </div>
-
-                      <div class="roww">
-    <h4>حالة السنة</h4>
-    <div class="input-groupp">
-        <input id="scard" type="radio" name="tr_year_status" value="1" {{ $call->tr_year_status == 1 ? 'checked' : '' }}/>
-        <label for="scard"><span><i class="fa-solid fa-check"></i>فعالة</span></label>
-
-        <input id="apaypal" type="radio" name="tr_year_status" value="0" {{ $call->tr_year_status == 0 ? 'checked' : '' }}/>
-        <label for="apaypal"> <span><i class="fa-solid fa-xmark"></i>غير فعالة</span></label>
-    </div>
-
-
-                        <!-- <div class="input-groupp">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider"></span>
-                              </label>
-                        </div> -->
-                        <div class="input-groupp input-groupp-icon" >
-                          <input type="text" name="tr_year_desc" id="tr_year_desc" placeholder="الوصف"  value="{{ $call->tr_year_desc }}"/>
-                          <div class="input-icon"><i class="fa-solid fa-audio-description"></i></div>
-                        </div>
-
-
-                      </div>
-                      <div class="roww">
-                       <input type="submit" value="حفظ" class="bttn">
-                      </div>
-                    </form>
-                  <!-- </div> -->
-
+                <div class="input-groupp input-groupp-icon">
+                    <input type="date" name="tr_year_end_date" id="tr_year_end_date" placeholder="تاريخ نهاية السنة" style="padding-bottom: 0;" value="{{ $call->tr_year_end_date }}"/>
+                    <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                </div>
             </div>
-        </div>
+
+            <div class="roww">
+                <h4>حالة السنة</h4>
+                <div class="input-groupp">
+                    <input id="scard" type="radio" name="tr_year_status" value="1" {{ $call->tr_year_status == 1 ? 'checked' : '' }} />
+                    <label for="scard"><span><i class="fa-solid fa-check"></i>فعالة</span></label>
+
+                    <input id="apaypal" type="radio" name="tr_year_status" value="0" {{ $call->tr_year_status == 0 ? 'checked' : '' }} />
+                    <label for="apaypal"><span><i class="fa-solid fa-xmark"></i>غير فعالة</span></label>
+                </div>
+
+                <div class="input-groupp input-groupp-icon">
+                    <input type="text" name="tr_year_desc" id="tr_year_desc" placeholder="الوصف" value="{{ $call->tr_year_desc }}" />
+                    <div class="input-icon"><i class="fa-solid fa-audio-description"></i></div>
+                </div>
+            </div>
+
+            <div class="roww">
+                <input type="submit" value="حفظ" class="bttn">
+            </div>
+        </form>
+        @else
+            <p>لم يتم العثور على بيانات للتعديل</p>
+        @endif
+    </div>
+</div>
+
 </div>
 
 

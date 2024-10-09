@@ -372,6 +372,7 @@ input:checked + label:active {
           <div class="overlay"></div>
          <div class="content">
          <div class="close-btn" onclick="togglePopuoo()">&times;</div>
+         @if(isset($call))
          <form onsubmit="updateType(event, {{ $call->tr_type_id }})">
          @csrf
          <input type="hidden" name="tr_type_id" value="{{ $call->tr_type_id }}">
@@ -401,6 +402,9 @@ input:checked + label:active {
                 <input type="submit" value="حفظ" class="bttn">
             </div>
          </form>
+         @else
+            <p>لم يتم العثور على بيانات للتعديل</p>
+        @endif
          </div>
         </div>
 

@@ -62,6 +62,7 @@ class BimarTrainingCourseController extends Controller
         }
 
         return redirect()->back()->with('message', 'تم الإضافة');
+
     }
 
 
@@ -78,13 +79,14 @@ class BimarTrainingCourseController extends Controller
      */
     public function edit($tr_course_id)
     {
-        $course = Bimar_Training_Course::find($tr_course_id);
+        $data = Bimar_Training_Course::find($tr_course_id);
+        $programs = Bimar_Training_Program::all();
+        return view('admin.updatecourse', compact('data','programs'));
+        // if (!$course) {
+        //     return response()->json(['error' => 'Course not found'], 404);
+        // }
 
-        if (!$course) {
-            return response()->json(['error' => 'Course not found'], 404);
-        }
-
-        return response()->json($course);
+        // return response()->json($course);
     }
 
 
@@ -92,8 +94,8 @@ class BimarTrainingCourseController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $tr_course_id)
-    { dd("iiii");
-        try {
+    {
+
             // Validate incoming data
             $validated = $request->validate([
                 'tr_course_code' => 'required',
@@ -136,12 +138,12 @@ class BimarTrainingCourseController extends Controller
             $course->save();
 
             // Redirect back with a success message
-            return response()->json(['message' => 'تم التعديل بنجاح'], 200);
-        } catch (\Exception $e) {
-            // Log the error for debugging
-            \Log::error('Error updating course: ' . $e->getMessage());
-            return response()->json(['message' => 'حدث خطأ أثناء التعديل: ' . $e->getMessage()], 500);
-        }
+            // return response()->json(['message' => 'تم التعديل بنجاح'], 200);
+            // return redirect()->back()->with(['message'=>'تم التعديل']);
+            // $data = Bimar_Training_Course::all();
+            // $programs = Bimar_Training_Program::all();
+            return redirect()->route('courses')->with(['message'=>'تم التعديل']);
+            // return view('admin.courses')->with(['data' => $data,'programs'=> $programs,'message'=>'تم التعديل']);
     }
 
 
@@ -167,7 +169,7 @@ class BimarTrainingCourseController extends Controller
     //         return response()->json(['success' => false, 'message' => 'Item not found'], 404);
     //     }
     // }
-    public function updateSwitch($courseId)
+    public function updatSwitch($courseId)
     {
         $course = Bimar_Training_Course::find($courseId);
         if($course){
