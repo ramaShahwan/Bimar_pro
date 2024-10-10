@@ -157,4 +157,19 @@ class BimarCourseEnrollmentController extends Controller
             return response()->json(['success' => false, 'message' => 'Item not found'], 404);
         }
     }
+    public function updatSwitch($Id)
+    {
+        $course = Bimar_Course_Enrollment::find($Id);
+        if($course){
+            if($course->tr_course_enrol_status){
+                $course->tr_course_enrol_status =0;
+            }
+            else{
+                $course->tr_course_enrol_status =1;
+            }
+            $course->save();
+        }
+        return back();
+
+    }
 }
