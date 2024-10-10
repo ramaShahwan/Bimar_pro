@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bimar_training_type', function (Blueprint $table) {
-            $table->id('tr_type_id')->autoIncrement();
+            // $table->id('tr_type_id')->autoIncrement();
+            $table->id();
             $table->string('tr_type_name_en', 45);
             $table->string('tr_type_name_ar', 45);
             $table->integer('tr_type_status')->default(0);
@@ -21,7 +22,7 @@ return new class extends Migration
             // $table->charset('utf8mb4');
             // $table->collation('utf8mb4_unicode_ci');
 
-            $table->primary('tr_type_id');
+            // $table->primary('tr_type_id');
             $table->timestamps();
 
         });
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bimar_training_type');
+        Schema::dropIfExists('bimar_training_types');
     }
 };

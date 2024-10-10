@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bimar_roles', function (Blueprint $table) {
-            $table->id('tr_role_id')->autoIncrement();
+            // $table->id('tr_role_id')->autoIncrement();
+            $table->id();
             $table->string('tr_role_code', 50)->nullable();
             $table->string('tr_role_name_en', 255)->nullable();
             $table->string('tr_role_name_ar', 255)->nullable();
@@ -22,7 +23,7 @@ return new class extends Migration
             // $table->charset('utf8mb4');
             // $table->collation('utf8mb4_unicode_ci');
 
-            $table->primary('tr_role_id');
+            // $table->primary('tr_role_id');
 
             $table->timestamps();
 

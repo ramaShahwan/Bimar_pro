@@ -37,7 +37,7 @@ class BimarTrainingCourseController extends Controller
             'tr_course_code' => 'required',
             'tr_course_name_en' => 'required',
             'tr_course_name_ar' => 'required',
-            'tr_course_program_id' => 'required',
+            'bimar_training_program_id' => 'required',
             'tr_is_diploma' => 'required',
         ]);
 
@@ -46,7 +46,7 @@ class BimarTrainingCourseController extends Controller
         $data->tr_course_code = $request->tr_course_code;
         $data->tr_course_name_en = $request->tr_course_name_en;
         $data->tr_course_name_ar = $request->tr_course_name_ar;
-        $data->tr_course_program_id = $request->tr_course_program_id;
+        $data->bimar_training_program_id = $request->bimar_training_program_id;
         $data->tr_course_desc = $request->tr_course_desc;
         $data->tr_course_status = $request->tr_course_status;
         $data->tr_is_diploma = $request->tr_is_diploma;
@@ -101,7 +101,7 @@ class BimarTrainingCourseController extends Controller
                 'tr_course_code' => 'required',
                 'tr_course_name_en' => 'required',
                 'tr_course_name_ar' => 'required',
-                'tr_course_program_id' => 'required',
+                'bimar_training_program_id' => 'required',
                 'tr_is_diploma' => 'required',
             ]);
 
@@ -113,7 +113,7 @@ class BimarTrainingCourseController extends Controller
             $course->tr_course_code = $request->tr_course_code;
             $course->tr_course_name_en = $request->tr_course_name_en;
             $course->tr_course_name_ar = $request->tr_course_name_ar;
-            $course->tr_course_program_id = $request->tr_course_program_id;
+            $course->bimar_training_program_id = $request->bimar_training_program_id;
             $course->tr_course_desc = $request->tr_course_desc;
             $course->tr_course_status = $request->tr_course_status;
             $course->tr_is_diploma = $request->tr_is_diploma;
@@ -137,7 +137,7 @@ class BimarTrainingCourseController extends Controller
             // Save changes to the database
             $course->save();
 
-            // Redirect back with a success message
+      
             // return response()->json(['message' => 'تم التعديل بنجاح'], 200);
             // return redirect()->back()->with(['message'=>'تم التعديل']);
             // $data = Bimar_Training_Course::all();

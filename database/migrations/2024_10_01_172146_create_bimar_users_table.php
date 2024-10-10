@@ -12,7 +12,8 @@ return new class extends Migration
      public function up(): void
     {
         Schema::create('bimar_users', function (Blueprint $table) {
-            $table->id('tr_user_id')->autoIncrement(); // bigint NOT NULL AUTO_INCREMENT
+            // $table->id('tr_user_id')->autoIncrement(); // bigint NOT NULL AUTO_INCREMENT
+            $table->id();
             $table->string('tr_user_name', 50)->unique(); // varchar(50) NOT NULL UNIQUE
             $table->string('tr_user_fname_en', 100); // varchar(100) NOT NULL
             $table->string('tr_user_lname_en', 100); // varchar(100) NOT NULL
@@ -33,28 +34,34 @@ return new class extends Migration
             $table->timestamp('tr_user_lastaccess')->nullable(); // timestamp DEFAULT NULL
             $table->timestamp('tr_user_createdate')->useCurrent();
             // $table->timestamp(); // هذا سيضيف tr_user_createdate مع CURRENT_TIMESTAMP
-            $table->primary('tr_user_id');
+            // $table->primary('tr_user_id');
 
             // foreign
-            $table->foreign('tr_user_rolid')
-                  ->references('tr_role_id')
-                  ->on('bimar_roles')
-                  ->onDelete('cascade');
+            $table->foreignId('bimar_role_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('bimar_users_status_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('bimar_users_gender_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('bimar_training_course_id')->constrained()->cascadeOnDelete()->nullable();
 
-            $table->foreign('tr_user_status')
-                  ->references('tr_users_status_id')
-                  ->on('bimar_users_status')
-                  ->onDelete('cascade');
 
-            $table->foreign('tr_user_gender')
-                  ->references('tr_users_gender_id')
-                  ->on('bimar_users_gender')
-                  ->onDelete('cascade');
+        //     $table->foreign('tr_user_rolid')
+        //           ->references('tr_role_id')
+        //           ->on('bimar_roles')
+        //           ->onDelete('cascade');
 
-            $table->foreign('tr_user_grade')
-                  ->references('tr_users_degree_id')
-                  ->on('bimar_users_academic_degree')
-                  ->onDelete('cascade');
+        //     $table->foreign('tr_user_status')
+        //           ->references('tr_users_status_id')
+        //           ->on('bimar_users_status')
+        //           ->onDelete('cascade');
+
+        //     $table->foreign('tr_user_gender')
+        //           ->references('tr_users_gender_id')
+        //           ->on('bimar_users_gender')
+        //           ->onDelete('cascade');
+
+        //     $table->foreign('tr_user_grade')
+        //           ->references('tr_users_degree_id')
+        //           ->on('bimar_users_academic_degree')
+        //           ->onDelete('cascade');
         });
     }
 

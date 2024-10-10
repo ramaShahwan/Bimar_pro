@@ -48,18 +48,19 @@ class BimarCourseEnrollmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tr_course_enrol_program_id' => 'required',
-            'tr_course_enrol_course_id' => 'required',
-            'tr_course_enrol_year_id' => 'required',
+            'bimar_training_program_id' => 'required',
+            'bimar_training_course_id' => 'required',
+            'bimar_training_year_id' => 'required',
+            'bimar_training_type_id' => 'required',
             'tr_course_enrol_arrangement' => 'required',
             'tr_course_enrol_price' => 'required',
             'tr_course_enrol_type' => 'required',
           ]);
 
         $data = new Bimar_Course_Enrollment;
-        $data->tr_course_enrol_program_id = $request->tr_course_enrol_program_id;
-        $data->tr_course_enrol_course_id = $request->tr_course_enrol_course_id;
-        $data->tr_course_enrol_year_id = $request->tr_course_enrol_year_id;
+        $data->bimar_training_program_id = $request->bimar_training_program_id;
+        $data->bimar_training_course_id = $request->bimar_training_course_id;
+        $data->bimar_training_year_id = $request->bimar_training_year_id;
         $data->tr_course_enrol_arrangement = $request->tr_course_enrol_arrangement;
         $data->tr_course_enrol_discount = $request->tr_course_enrol_discount;
         $data->tr_course_enrol_desc = $request->tr_course_enrol_desc;
@@ -71,7 +72,7 @@ class BimarCourseEnrollmentController extends Controller
         $data->tr_course_enrol_oralmark = $request->tr_course_enrol_oralmark;
         $data->tr_course_enrol_finalmark = $request->tr_course_enrol_finalmark;
         $data->tr_course_enrol_price = $request->tr_course_enrol_price;
-        $data->tr_course_enrol_type = $request->tr_course_enrol_type;
+        $data->bimar_training_type_id = $request->bimar_training_type_id;
         $data->tr_course_enrol_status = $request->tr_course_enrol_status;
         $data->tr_course_enrol_update_date = now();
         $data->tr_course_enrol_create_date = now();
@@ -106,17 +107,17 @@ class BimarCourseEnrollmentController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'tr_course_enrol_program_id' => 'required',
-            'tr_course_enrol_course_id' => 'required',
-            'tr_course_enrol_year_id' => 'required',
+            'bimar_training_program_id' => 'required',
+            'bimar_training_course_id' => 'required',
+            'bimar_training_year_id' => 'required',
             'tr_course_enrol_arrangement' => 'required',
             'tr_course_enrol_price' => 'required',
-            'tr_course_enrol_type' => 'required',
+            'bimar_training_type_id' => 'required',
           ]);
        $data = Bimar_Course_Enrollment::findOrFail($id);
-       $data->tr_course_enrol_program_id = $request->tr_course_enrol_program_id;
-       $data->tr_course_enrol_course_id = $request->tr_course_enrol_course_id;
-       $data->tr_course_enrol_year_id = $request->tr_course_enrol_year_id;
+       $data->bimar_training_program_id = $request->bimar_training_program_id;
+       $data->bimar_training_course_id = $request->bimar_training_course_id;
+       $data->bimar_training_year_id = $request->bimar_training_year_id;
        $data->tr_course_enrol_arrangement = $request->tr_course_enrol_arrangement;
        $data->tr_course_enrol_discount = $request->tr_course_enrol_discount;
        $data->tr_course_enrol_desc = $request->tr_course_enrol_desc;
@@ -128,7 +129,7 @@ class BimarCourseEnrollmentController extends Controller
        $data->tr_course_enrol_oralmark = $request->tr_course_enrol_oralmark;
        $data->tr_course_enrol_finalmark = $request->tr_course_enrol_finalmark;
        $data->tr_course_enrol_price = $request->tr_course_enrol_price;
-       $data->tr_course_enrol_type = $request->tr_course_enrol_type;
+       $data->bimar_training_type_id = $request->bimar_training_type_id;
        $data->tr_course_enrol_status = $request->tr_course_enrol_status;
        $data->tr_course_enrol_update_date = now();
        $data->update();

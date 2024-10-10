@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bimar_training_programs', function (Blueprint $table) {
-            $table->id('tr_program_id')->autoIncrement();
+            // $table->id('tr_program_id')->autoIncrement();
+            $table->id();
             $table->string('tr_program_code', 50);
             $table->string('tr_program_name_en');
             $table->string('tr_program_name_ar');
@@ -23,7 +24,7 @@ return new class extends Migration
             // $table->charset('utf8mb4');
             // $table->collation('utf8mb4_unicode_ci');
 
-            $table->primary('tr_program_id');
+            // $table->primary('tr_program_id');
 
             $table->timestamps();
         });

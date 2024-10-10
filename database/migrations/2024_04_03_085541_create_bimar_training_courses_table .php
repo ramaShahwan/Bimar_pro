@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bimar_training_courses', function (Blueprint $table) {
-            $table->id('tr_course_id')->autoIncrement();
+            // $table->id('tr_course_id')->autoIncrement();
+            $table->id();
             $table->string('tr_course_code', 50);
             $table->string('tr_course_name_en');
             $table->string('tr_course_name_ar');
@@ -32,12 +33,15 @@ return new class extends Migration
             $table->index('tr_course_status', 'TR_COURSE_STATUS_INDEX');
 
             // foreign
-            $table->foreign('tr_course_program_id')
-                  ->references('tr_program_id')
-                  ->on('bimar_training_programs')
-                  ->onDelete('cascade');
 
-            $table->primary('tr_course_id');
+            $table->foreignId('bimar_training_program_id')->constrained()->cascadeOnDelete()->nullable();
+
+            // $table->foreign('tr_course_program_id')
+            //       ->references('tr_program_id')
+            //       ->on('bimar_training_programs')
+            //       ->onDelete('cascade');
+
+            // $table->primary('tr_course_id');
         });
     }
 

@@ -90,7 +90,7 @@ class BimarTrainingYearController extends Controller
             $data->tr_year_end_date = $request->tr_year_end_date;
             $data->tr_year_status = $request->tr_year_status; // تحديث الحالة
             $data->tr_year_desc = $request->tr_year_desc;
-            $data->save();
+            $data->update();
 
             return response()->json(['message' => 'تم التعديل بنجاح'], 200);
         } catch (\Exception $e) {
