@@ -69,14 +69,14 @@ class BimarTrainingProgramController extends Controller
      * Show the form for editing the specified resource.
      */
 
-     public function edit($tr_program_id)
+     public function edit($id)
      {
-         $data = Bimar_Training_Program::findOrFail($tr_program_id);
+         $data = Bimar_Training_Program::findOrFail($id);
 
          return response()->json($data);
      }
 
-     public function update(Request $request, $tr_program_id)
+     public function update(Request $request, $id)
      {
          $validated = $request->validate([
              'tr_program_code' => 'required',
@@ -84,7 +84,7 @@ class BimarTrainingProgramController extends Controller
              'tr_program_name_ar' => 'required',
          ]);
 
-         $data = Bimar_Training_Program::findOrFail($tr_program_id);
+         $data = Bimar_Training_Program::findOrFail($id);
          $oldImageName = $data->tr_program_img;
 
          $data->tr_program_code = $request->tr_program_code;

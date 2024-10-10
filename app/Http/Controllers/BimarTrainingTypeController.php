@@ -12,12 +12,12 @@ class BimarTrainingTypeController extends Controller
      */
     public function index()
     {
-        $data = bimar_training_type::all();
+        $data = Bimar_Training_Type::all();
         return view('admin.training_type',compact('data'));
     }
     public function updateSwitch($typeId)
     {
-        $type = bimar_training_type::find($typeId);
+        $type = Bimar_Training_Type::find($typeId);
         if($type){
             if($type->tr_type_status){
                 $type->tr_type_status =0;
@@ -50,7 +50,7 @@ class BimarTrainingTypeController extends Controller
             'tr_type_name_ar' => 'required|unique:bimar_training_types',
           ]);
 
-        $data = new bimar_training_type;
+        $data = new Bimar_Training_Type;
         $data->tr_type_name_en = $request->tr_type_name_en;
         $data->tr_type_name_ar = $request->tr_type_name_ar;
         $data->tr_type_status = $request->tr_type_status;
@@ -70,9 +70,9 @@ class BimarTrainingTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($tr_type_id)
+    public function edit($id)
     {
-        $data = Bimar_Training_Type::findOrFail($tr_type_id);
+        $data = Bimar_Training_Type::findOrFail($id);
         return response()->json($data);
     }
 
@@ -80,14 +80,14 @@ class BimarTrainingTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $tr_type_id)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'tr_type_name_en' => 'required',
             'tr_type_name_ar' => 'required',
         ]);
 
-        $data = Bimar_Training_Type::findOrFail($tr_type_id);
+        $data = Bimar_Training_Type::findOrFail($id);
         $data->tr_type_name_en = $request->tr_type_name_en;
         $data->tr_type_name_ar = $request->tr_type_name_ar;
         $data->tr_type_status = $request->tr_type_status;
