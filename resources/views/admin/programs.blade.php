@@ -408,6 +408,7 @@ input[type="radio"]:checked + label {
             <div class="content">
                 <div class="close-btn" onclick="togglePopuoo()">&times;</div>
                 <!-- <div class="containerr"> -->
+                @if(isset($call))
                 <form id="editForm" onsubmit="updateProgram(event)">
                     @csrf
                     <input type="hidden" name="tr_program_id" value="{{ $call->tr_program_id }}">
@@ -477,6 +478,9 @@ input[type="radio"]:checked + label {
                        <input type="submit" value="حفظ" class="bttn">
                       </div>
                     </form>
+                    @else
+            <p>لم يتم العثور على بيانات للتعديل</p>
+        @endif
                   <!-- </div> -->
 
             </div>
