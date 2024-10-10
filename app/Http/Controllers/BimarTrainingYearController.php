@@ -60,9 +60,9 @@ class BimarTrainingYearController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($tr_year_id)
+    public function edit($id)
     {
-        $data = Bimar_Training_Year::findOrFail($tr_year_id);
+        $data = Bimar_Training_Year::findOrFail($id);
         return response()->json($data); // يجب أن تحتوي على `tr_year_status`
     }
 
@@ -70,7 +70,7 @@ class BimarTrainingYearController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $tr_year_id)
+    public function update(Request $request, $id)
     {
         try {
             $validated = $request->validate([
@@ -82,7 +82,7 @@ class BimarTrainingYearController extends Controller
             ]);
 
             // التأكد من الحصول على السجل الصحيح
-            $data = Bimar_Training_Year::findOrFail($tr_year_id);
+            $data = Bimar_Training_Year::findOrFail($id);
             // تحديث البيانات
             $data->tr_year_name = $request->tr_year_name;
             $data->tr_year = $request->tr_year;
@@ -139,11 +139,5 @@ class BimarTrainingYearController extends Controller
         return back();
 
     }
-
-
-
-
-
-
 
 }
