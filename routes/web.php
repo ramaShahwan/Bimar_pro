@@ -37,7 +37,7 @@ Route::get('/programs',[BimarTrainingProgramController::class,'index'])-> name('
 Route::get('/courses',[BimarTrainingCourseController::class,'index'])-> name('courses');
 // Route::view('/training_type', 'admin.training_type')->name('training_type');
 Route::get('/training_type',[BimarTrainingTypeController::class,'index'])-> name('training_type');
-Route::view('/course_enrollments', 'admin.course_enrollments')->name('course_enrollments');
+// Route::view('/course_enrollments', 'admin.course_enrollments')->name('course_enrollments');
 Route::get('/course_enrollments',[BimarCourseEnrollmentController::class,'index'])-> name('course_enrollments');
 
 Route::get('/year',[BimarTrainingYearController::class,'index'])-> name('year');

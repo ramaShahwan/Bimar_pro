@@ -31,7 +31,7 @@ h4{
 </style>
 <div id="page-wrapper">
             <div class="containerr">
-            <form action="{{url('cours_enrollments/store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{url('course_enrollments/store')}}" method="post" enctype="multipart/form-data">
             @csrf
                       <div class="roww">
 
@@ -47,22 +47,19 @@ h4{
 
                             </div>
                             <div class="input-groupp input-groupp-icon">
-                            <select class=" @error('bimar_training_program_id') is-invalid @enderror" name="bimar_training_program_id" id="bimar_training_program_id" aria-label="Default select example" >
-        <option selected> اختر البرنامج التدريبي</option>
+    <select name="bimar_training_program_id" id="bimar_training_program_id" class="@error('bimar_training_program_id') is-invalid @enderror" aria-label="Default select example">
+        <option selected>اختر البرنامج التدريبي</option>
         @foreach ($programs as $program)
-  <option value="{{ $program->id }}">{{ $program->tr_program_name_ar }}</option>
-  @endforeach
-</select>
+            <option value="{{ $program->id }}">{{ $program->tr_program_name_ar }}</option>
+        @endforeach
+    </select>
+</div>
 
-
-                            </div>
-                            <div class="input-groupp input-groupp-icon">
-                            <select id="bimar_training_course_id" name="bimar_training_course_id" class="form-control @error('bimar_training_course_id') is-invalid @enderror" >
-                        <option value="">-- اختر الكورس التدريبي --</option>
-                        </select>
-
-
-                            </div>
+<div class="input-groupp input-groupp-icon">
+    <select id="bimar_training_course_id" name="bimar_training_course_id" class="form-control @error('bimar_training_course_id') is-invalid @enderror">
+        <option value="">-- اختر الكورس التدريبي --</option>
+    </select>
+</div>
 
                         <div class="input-groupp input-groupp-icon">
                             <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
@@ -118,7 +115,7 @@ h4{
                         <select name="bimar_training_type_id" id="bimar_training_type_id">
                          <option>اختر  نوع التدريب</option>
                              @foreach ($types as $type)
-                               <option value="{{ $type->id }}">{{ $type->tr_year_name }}</option>
+                               <option value="{{ $type->id }}">{{ $type->tr_type_name_ar }}</option>
                              @endforeach
                         </select>
 
@@ -144,27 +141,30 @@ h4{
 
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-     $(document).ready(function () {
-    $('#tbimar_training_program_id').on('change', function () {
-        var bimartrainingprogramid = this.value;
-        $("#bimar_training_course_id").html(''); // تفريغ قائمة الكورسات قبل الجلب
-        $.ajax({
-            url: "{{ route('getcourse') }}?bimar_training_program_id=" + bimartrainingprogramid,
-            type: "GET",
-            success: function (result) {
-                $('#bimar_training_course_id').html('<option value="">-- اختر الكورس التدريبي --</option>');
-                $.each(result, function (key, value) {
-                    $("#bimar_training_course_id").append('<option value="' + value.id + '">' + value.name + '</option>');
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("حدث خطأ: " + error);
-                alert("لم يتم جلب الكورسات. تحقق من المسار أو الكود.");
-            }
-        });
+<script>
+$(document).ready(function () {
+    $('#bimar_training_program_id').on('change', function () {
+        var programId = $(this).val();
+        $("#bimar_training_course_id").html('<option value="">-- اختر الكورس التدريبي --</option>');
+
+        if (programId) {
+            $.ajax({
+                url: "{{ route('getcourse') }}",
+                type: "GET",
+                data: { bimar_training_program_id: programId },
+                success: function (result) {
+                    $.each(result, function (key, value) {
+                        $("#bimar_training_course_id").append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("حدث خطأ: " + error);
+                    alert("لم يتم جلب الكورسات. تحقق من المسار أو الكود.");
+                }
+            });
+        }
     });
 });
-
+</script>
 
 @endsection

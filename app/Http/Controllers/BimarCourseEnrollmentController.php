@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Bimar_Training_Program;
 use App\Models\Bimar_Training_Year;
 use App\Models\Bimar_Training_Type;
+use Illuminate\Support\Facades\DB;
 class BimarCourseEnrollmentController extends Controller
 {
 
@@ -32,13 +33,10 @@ class BimarCourseEnrollmentController extends Controller
     public function getcourse(Request $request)
     {
         $courses = DB::table('bimar_training_courses')
-            ->where('tr_course_program_id', $request->tr_program_id)
-            ->get(['tr_course_id as id', 'tr_course_name_ar as name']); // التأكد من الأعمدة الصحيحة
-        if (count($courses) > 0) {
-            return response()->json($courses);
-        } else {
-            return response()->json([]);
-        }
+            ->where('bimar_training_program_id', $request->bimar_training_program_id)
+            ->get(['id as id', 'tr_course_name_ar as name']);
+
+        return response()->json($courses);
     }
 
 
@@ -55,7 +53,7 @@ class BimarCourseEnrollmentController extends Controller
             'bimar_training_type_id' => 'required',
             'tr_course_enrol_arrangement' => 'required',
             'tr_course_enrol_price' => 'required',
-            'tr_course_enrol_type' => 'required',
+
           ]);
 
         $data = new Bimar_Course_Enrollment;
@@ -79,7 +77,7 @@ class BimarCourseEnrollmentController extends Controller
         $data->tr_course_enrol_create_date = now();
         $data->save();
 
-     return redirect()->back()->with('message','تم الإضافة');
+        return redirect()->route('course_enrollments')->with(['message'=>'تم الاضافة']);
     }
 
     /**
