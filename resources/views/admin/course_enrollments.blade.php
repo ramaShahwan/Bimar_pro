@@ -263,8 +263,8 @@ body{
                 <div class="card">
                         <div class="card-header" style="text-align: start;font-size: 20px;display: flex;justify-content: space-between;align-items: center;">
                             <h3><i class="fa-sharp fa-solid fa-calendar-week"></i> سنوات</h3>
-                            <!-- <a href="add.html" style="background: #007bff;padding: 6px;color: white;"><i class="las la-user-plus"></i> مدرب جديد</a> -->
-                            <button onclick="togglePopuo()" class="bbtn">اضافة سنة</button>
+                            <a href="{{url('course_enrollments/create')}}" class="bbtn">  تسجيل جديد</a>
+                            <!-- <button onclick="togglePopuo()" class="bbtn">اضافة سنة</button> -->
                         </div>
                     <div class="card-block">
                         <table class="table table-bordered table-striped table-condensed">
@@ -282,27 +282,27 @@ body{
                                 </tr>
                             </thead>
                             <tbody style="text-align: center;">
+                            @foreach($data as $call)
                                 <tr>
-                                    <td>2020-2021 </td>
-                                    <td>ai </td>
-                                    <td>ai </td>
-                                    <td>الدورة الاولى </td>
-                                    <td>500000 </td>
-                                    <td>الدورة جميلة </td>
+                                    <td>{{ $call->bimar_training_year->tr_year_name ?? 'اسم غير متاح' }} </td>
+                                    <td>{{ $call->bimar_training_program->tr_program_name_ar ?? 'اسم غير متاح' }} </td>
+                                    <td>{{ $call->bimar_raining_course->tr_course_name_ar ?? 'اسم غير متاح' }} </td>
+                                    <td>{{$call->tr_course_enrol_arrangement}}   </td>
+                                    <td>{{$call->tr_course_enrol_discount}}   </td>
+                                    <td>{{$call->tr_course_enrol_desc}}    </td>
 
-                                    <td><label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider"></span>
-                                      </label></td>
+                                    <td>   <a href=" course_enrollments/{{$call->id}}" class="btn btn-sm btn-{{$call->tr_course_enrol_status ? 'success' : 'danger'}}">
+    {{$call->tr_course_enrol_status ? 'مفتوحة' : 'مغلقة '}}
+</a></td>
 
                                     <td>
                                         <!-- <a href=""><span class="las la-trash-alt" style="font-size: 30px; color: #f00707;"></span></a> -->
-                                        <!-- <a href="update.html"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></a> -->
-                                        <button onclick="togglePopuoo()" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span> </button>
+                                        <a href="{{url('course_enrollments/edit',$call->id)}}"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></a>
+                                        <!-- <button onclick="togglePopuoo()" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span> </button> -->
                                         <!-- <a href="show.html"><span class="las la-eye" style="font-size: 30px; color: #1cda55;"></span></a> -->
                                     </td>
                                 </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                         <!-- <nav>
@@ -327,114 +327,7 @@ body{
             </div>
             <!-- /. PAGE INNER  -->
         </div>
-        <div class="popup" id="popup-1">
-            <div class="overlay"></div>
-            <div class="content">
-                <div class="close-btn" onclick="togglePopuo()">&times;</div>
-                <!-- <div class="containerr"> -->
-                    <form>
-                      <div class="roww">
 
-                        <h4>تسجيل جديد</h4>
-
-                            <div class="input-groupp">
-                              <select>
-                                <option>اختر السنة التدريبية</option>
-                                <option>2020</option>
-                                <option>2021</option>
-                              </select>
-
-                            </div>
-                            <div class="input-groupp input-groupp-icon">
-                                <select>
-                                    <option>اختر البرنامج التدريبي</option>
-                                    <option>ai</option>
-                                  </select>
-
-
-                            </div>
-                            <div class="input-groupp input-groupp-icon">
-                                <select>
-                                    <option>اختر الدورة التدريبية</option>
-                                    <option>ai</option>
-                                  </select>
-
-
-                            </div>
-
-                        <div class="input-groupp input-groupp-icon">
-                            <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          <input type="number" placeholder="رقم(ترتيب) الدورة التدريبية" />
-
-                        </div>
-                        <div class="input-groupp input-groupp-icon">
-                          <input type="number" placeholder="نسبة الحسم على الدورة" />
-                          <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                        </div>
-                        <div class="input-groupp input-groupp-icon">
-                            <input type="text" placeholder="الوصف" />
-                            <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          </div>
-
-                        <div class="input-groupp input-groupp-icon">
-                          <input type="date" placeholder="تاريخ بداية التسجيل" style="padding-bottom: 0;" />
-                          <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                        </div>
-                        <div class="input-groupp input-groupp-icon">
-                            <input type="date" placeholder="تاريخ نهاية التسجيل" style="padding-bottom: 0;" />
-                            <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                          </div>
-                          <div class="input-groupp input-groupp-icon">
-                            <input type="date" placeholder="تاريخ بداية الجلسات" style="padding-bottom: 0;"/>
-                            <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                          </div>
-                          <div class="input-groupp input-groupp-icon">
-                            <input type="date" placeholder="تاريخ نهاية الجلسات" style="padding-bottom: 0;" />
-                            <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                          </div>
-                          <div class="input-groupp input-groupp-icon">
-                            <input type="number" placeholder="علامة المحصلة النهائية" />
-                            <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          </div>
-                          <div class="input-groupp input-groupp-icon">
-                            <input type="text" placeholder="علامة الامتحان النهائي " />
-                            <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          </div>
-                          <div class="input-groupp input-groupp-icon">
-                          <input type="text" placeholder="علامة الشفهي  " />
-                          <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                        </div>
-                        <div class="input-groupp input-groupp-icon">
-                            <input type="text" placeholder="رسوم التسجيل" />
-                            <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          </div>
-                        <div class="input-groupp input-groupp-icon">
-                            <select>
-                                <option>اختر نوع التدريب </option>
-                                <option>ai</option>
-                              </select>
-
-
-                        </div>
-                      </div>
-
-                      <div class="roww">
-                        <h4>حالة الدورة</h4>
-                        <div class="input-groupp">
-                          <input id="qcard" type="radio" name="payment-method" value="0" checked="true"/>
-                          <label for="qcard"><span><i class="fa-solid fa-check"></i>مفتوحة للتسجيل</span></label>
-                          <input id="qpaypal" type="radio" name="payment-method" value="1"/>
-                          <label for="qpaypal"> <span><i class="fa-solid fa-xmark"></i>مغلقة </span></label>
-                        </div>
-                      </div>
-                      <div class="roww">
-                       <input type="submit" value="حفظ" class="bttn">
-                      </div>
-                    </form>
-                  <!-- </div> -->
-
-            </div>
-        </div>
         <div class="popup" id="popuppo-1">
             <div class="overlay"></div>
             <div class="content">
@@ -587,4 +480,4 @@ body{
     </script>
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
-    @endsection
+@endsection

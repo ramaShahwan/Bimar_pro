@@ -226,7 +226,7 @@ body{
                                     <td>{{$call->tr_course_name_ar}}</td>
                                     <td>{{$call->tr_course_name_en}}</td>
                                     <td><img src="{{URL::asset('/img/course/'.$call->tr_course_img)}}" alt="" class="bg-img" height="40px" width="40px"></td>
-                                    <td>   <a href=" course/{{$call->tr_course_id}}" class="btn btn-sm btn-{{$call->tr_course_status ? 'success' : 'danger'}}">
+                                    <td>   <a href=" course/{{$call->id}}" class="btn btn-sm btn-{{$call->tr_course_status ? 'success' : 'danger'}}">
     {{$call->tr_course_status ? 'فعالة' : 'غير فعالة'}}
 </a></td>
 <td>{{ $call->tr_is_diploma == 1 ? 'نعم' : 'لا' }}</td>
@@ -235,7 +235,7 @@ body{
 
                                     <td>
                                         <!-- <a href=""><span class="las la-trash-alt" style="font-size: 30px; color: #f00707;"></span></a> -->
-                                        <a href="{{url('course/edit',$call->tr_course_id)}}"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></a>
+                                        <a href="{{url('course/edit',$call->id)}}"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></a>
                                         <!-- <button onclick="togglePopuoo()" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span> </button> -->
                                         <!-- <button onclick="showEditPopup({{ $call->tr_course_id }})" style="border: none; background: none;">
     <span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span>
@@ -316,10 +316,10 @@ body{
                           <label for="paypal"> <span><i class="fa-solid fa-xmark"></i>لا </span></label>
                         </div>
                         <div class="input-groupp">
-                        <select name="tr_course_program_id">
+                        <select name="bimar_training_program_id">
                          <option>اختر السنة التدريبية</option>
                              @foreach ($programs as $program)
-                               <option value="{{ $program->tr_program_id }}">{{ $program->tr_program_name_ar }}</option>
+                               <option value="{{ $program->bimar_training_program_id}}">{{ $program->tr_program_name_ar }}</option>
                              @endforeach
                         </select>
 
@@ -376,8 +376,8 @@ body{
 
     </script>
     <script>
-       function showEditPopup(tr_course_id) {
-    fetch(`/course/edit/${tr_course_id}`)
+       function showEditPopup(id) {
+    fetch(`/course/edit/${id}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -423,8 +423,8 @@ function updateCourse(event) {
     formData.append('tr_course_name_ar', document.getElementById('tr_course_name_ar').value);
     formData.append('tr_course_status', document.querySelector('input[name="tr_course_status"]:checked').value);
     formData.append('tr_course_desc', document.getElementById('tr_course_desc').value);
-    formData.append('tr_course_id', document.querySelector('input[name="tr_course_id"]').value);
-    formData.append('tr_course_program_id', document.querySelector('select[name="tr_course_program_id"]').value);
+    formData.append('id', document.querySelector('input[name="id"]').value);
+    formData.append('bimar_training_program_id', document.querySelector('select[name="bimar_training_program_id"]').value);
     formData.append('tr_is_diploma', document.querySelector('input[name="tr_is_diploma"]:checked').value);
 
     const newImage = document.getElementById('tr_course_img').files[0];
@@ -433,7 +433,7 @@ function updateCourse(event) {
     }
     console.log(Array.from(formData.entries()));
 
-    let url = `/course/update/${formData.get('tr_course_id')}`;
+    let url = `/course/update/${formData.get('id')}`;
 
     fetch(url, {
         method: 'POST',

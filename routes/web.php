@@ -3,6 +3,7 @@ use App\Http\Controllers\BimarTrainingYearController;
 use App\Http\Controllers\BimarTrainingProgramController;
 use App\Http\Controllers\BimarTrainingTypeController;
 use App\Http\Controllers\BimarTrainingCourseController;
+use App\Http\Controllers\BimarCourseEnrollmentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,11 @@ Route::view('/login', 'admin.login')->name('login');
 Route::get('/programs',[BimarTrainingProgramController::class,'index'])-> name('programs');
 // Route::view('/courses', 'admin.courses')->name('courses');
 Route::get('/courses',[BimarTrainingCourseController::class,'index'])-> name('courses');
-Route::view('/training_type', 'admin.training_type')->name('training_type');
+// Route::view('/training_type', 'admin.training_type')->name('training_type');
 Route::get('/training_type',[BimarTrainingTypeController::class,'index'])-> name('training_type');
 Route::view('/course_enrollments', 'admin.course_enrollments')->name('course_enrollments');
+Route::get('/course_enrollments',[BimarCourseEnrollmentController::class,'index'])-> name('course_enrollments');
+
 Route::get('/year',[BimarTrainingYearController::class,'index'])-> name('year');
 Route::prefix('year')->controller(BimarTrainingYearController::class)->group(function(){
     Route::get('/create', 'create');
@@ -45,8 +48,14 @@ Route::prefix('year')->controller(BimarTrainingYearController::class)->group(fun
 Route::prefix('course')->controller(BimarTrainingCourseController::class)->group(function(){
 
     Route::post('/store', 'store');
-    Route::get('/edit/{tr_course_id}', 'edit');
-    Route::put('/update/{tr_course_id}', 'update');
+    Route::get('/edit/{id}', 'edit');
+    Route::put('/update/{id}', 'update');
+});
+Route::prefix('course_enrollments')->controller(BimarCourseEnrollmentController::class)->group(function(){
+    Route::get('/create', 'create');
+    Route::post('/store', 'store');
+    Route::get('/edit/{id}', 'edit');
+    Route::put('/update/{id}', 'update');
 });
 Route::prefix('type')->controller(BimarTrainingTypeController::class)->group(function(){
     Route::get('/create', 'create');
@@ -56,6 +65,7 @@ Route::prefix('program')->controller(BimarTrainingProgramController::class)->gro
     Route::get('/create', 'create');
     Route::post('/store', 'store');
 });
+Route::get('getcourse', [BimarCourseEnrollmentController::class, 'getcourse'])->name('getcourse');
 
 Route::post('/update-switch/{id}', [BimarTrainingYearController::class, 'updateSwitchStatus']);
 // Route::get('/getYearData/{id}', [YourController::class, 'getYearData']);
@@ -63,16 +73,17 @@ Route::post('/update-switch/{id}', [BimarTrainingYearController::class, 'updateS
 
 // Route::get('/years/edit/{tr_year_id}', [BimarTrainingYearController::class, 'edit'])->name('years.edit');
 // Route::put('/years/update/{tr_year_id}', [BimarTrainingYearController::class, 'update'])->name('years.update');
-Route::get('/years/edit/{tr_year_id}', [BimarTrainingYearController::class, 'edit'])->name('years.edit');
-Route::put('/years/update/{tr_year_id}', [BimarTrainingYearController::class, 'update'])->name('years.update');
-Route::get('/program/edit/{tr_program_id}', [BimarTrainingProgramController::class, 'edit'])->name('program.edit');
-Route::POST('/program/update/{tr_program_id}', [BimarTrainingProgramController::class, 'update'])->name('program.update');
-Route::get('type/{tr_type_id}', [BimarTrainingTypeController::class, 'updateSwitch']);
-Route::get('year/{tr_year_id}', [BimarTrainingYearController::class, 'updateSwitch']);
-Route::get('program/{tr_program_id}', [BimarTrainingProgramController::class, 'updateSwitch']);
-Route::get('/type/edit/{tr_type_id}', [BimarTrainingTypeController::class, 'edit'])->name('type.edit');
-Route::put('/type/update/{tr_type_id}', [BimarTrainingTypeController::class, 'update'])->name('type.update');
-Route::get('course/{tr_course_id}', [BimarTrainingCourseController::class, 'updatSwitch']);
+Route::get('/years/edit/{id}', [BimarTrainingYearController::class, 'edit'])->name('years.edit');
+Route::put('/years/update/{id}', [BimarTrainingYearController::class, 'update'])->name('years.update');
+Route::get('/program/edit/{id}', [BimarTrainingProgramController::class, 'edit'])->name('program.edit');
+Route::POST('/program/update/{id}', [BimarTrainingProgramController::class, 'update'])->name('program.update');
+Route::get('type/{id}', [BimarTrainingTypeController::class, 'updateSwitch']);
+Route::get('year/{id}', [BimarTrainingYearController::class, 'updateSwitch']);
+Route::get('program/{id}', [BimarTrainingProgramController::class, 'updateSwitch']);
+Route::get('/type/edit/{id}', [BimarTrainingTypeController::class, 'edit'])->name('type.edit');
+Route::put('/type/update/{id}', [BimarTrainingTypeController::class, 'update'])->name('type.update');
+Route::get('course/{id}', [BimarTrainingCourseController::class, 'updatSwitch']);
+Route::get('course_enrollments/{id}', [BimarCourseEnrollmentController::class, 'updatSwitch']);
 // Route::get('/course/edit/{tr_course_id}', [BimarTrainingCourseController::class, 'edit'])->name('course.edit');
 // Route::post('/course/update/{tr_course_id}', [BimarTrainingCourseController::class, 'update'])->name('course.update');
 
