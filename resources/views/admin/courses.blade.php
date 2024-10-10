@@ -317,7 +317,7 @@ body{
                         </div>
                         <div class="input-groupp">
                         <select name="bimar_training_program_id" id="bimar_training_program_id">
-                         <option>اختر السنة التدريبية</option>
+                         <option>اختر البرنامج التدريبي</option>
                              @foreach ($programs as $program)
                                <option value="{{ $program->id}}">{{ $program->tr_program_name_ar }}</option>
                              @endforeach

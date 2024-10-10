@@ -50,6 +50,8 @@ return new class extends Migration
             $table->unsignedBigInteger('bimar_training_program_id')->nullable();
             $table->unsignedBigInteger('bimar_training_course_id')->nullable();
             $table->unsignedBigInteger('bimar_training_year_id')->nullable();
+            $table->unsignedBigInteger('bimar_training_type_id')->nullable();
+
             $table->unsignedBigInteger('tr_course_enrol_arrangement');
             $table->unsignedBigInteger('tr_course_enrol_discount')->default(0);
             $table->text('tr_course_enrol_desc')->nullable();
@@ -61,7 +63,6 @@ return new class extends Migration
             $table->float('tr_course_enrol_oralmark', 5, 2)->nullable();
             $table->float('tr_course_enrol_finalmark', 5, 2)->nullable();
             $table->float('tr_course_enrol_price');
-            $table->unsignedBigInteger('tr_course_enrol_type');
             $table->unsignedBigInteger('tr_course_enrol_status')->default(0);
             $table->dateTime('tr_course_enrol_update_date')->nullable();
             $table->dateTime('tr_course_enrol_create_date')->useCurrent();
