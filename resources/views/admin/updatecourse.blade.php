@@ -31,10 +31,10 @@ h4{
 </style>
 <div id="page-wrapper">
             <div class="containerr">
-            <form action="  {{url('course/update',$data->tr_course_id)}}" method="Post" enctype="multipart/form-data">
+            <form action="  {{url('course/update',$data->id)}}" method="Post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <input type="hidden" name="tr_course_id" value="{{ $data->tr_course_id }}">
+            <input type="hidden" name="id" value="{{ $data->id }}">
 
               <div class="roww">
                         <h4> تعديل الدورة</h4>
@@ -92,11 +92,11 @@ h4{
                           <div class="input-icon"><i class="fa-solid fa-audio-description"></i></div>
                         </div>
                         <div class="input-groupp">
-                        <select name="tr_course_program_id">
+                        <select name="bimar_training_program_id">
                          <!-- <option>اختر السنة التدريبية</option> -->
                          @foreach ($programs as $program)
 
-                        <option value="{{ $program->tr_program_id }}" {{ $program->tr_program_id == $data->tr_program_id ? 'selected' : '' }}>
+                        <option value="{{ $program->bimar_training_program_id}}" {{ $program->bimar_training_program_id == $data->bimar_training_program_id ? 'selected' : '' }}>
                             {{ $program->tr_program_name_ar }}
                         </option>
                     @endforeach

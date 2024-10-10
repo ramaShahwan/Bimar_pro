@@ -315,7 +315,7 @@ input[type="radio"]:checked + label {
     <input type="checkbox" class="switch-button" data-id="{{ $call->tr_program_id }}" {{ $call->tr_program_status == 1 ? 'checked' : '' }}>
     <span class="slider"></span>
 </label></td> -->
-<td>   <a href=" program/{{$call->tr_program_id}}" class="btn btn-sm btn-{{$call->tr_program_status ? 'success' : 'danger'}}">
+<td>   <a href=" program/{{$call->id}}" class="btn btn-sm btn-{{$call->tr_program_status ? 'success' : 'danger'}}">
     {{$call->tr_program_status ? 'فعالة' : 'غير فعالة'}}
 </a></td>
                                       <td>{{$call->tr_program_desc}} </td>
@@ -324,7 +324,7 @@ input[type="radio"]:checked + label {
                                         <!-- <a href="update.html"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></a> -->
                                         <!-- <button onclick="togglePopuoo()" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span> </button> -->
                                         <!-- <a href="show.html"><span class="las la-eye" style="font-size: 30px; color: #1cda55;"></span></a> -->
-                                        <button onclick="showEditPopup({{ $call->tr_program_id }})" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></button>
+                                        <button onclick="showEditPopup({{ $call->id }})" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></button>
                                         </td>
                                 </tr>
                                 @endforeach
@@ -411,7 +411,7 @@ input[type="radio"]:checked + label {
                 @if(isset($call))
                 <form id="editForm" onsubmit="updateProgram(event)">
                     @csrf
-                    <input type="hidden" name="tr_program_id" value="{{ $call->tr_program_id }}">
+                    <input type="hidden" name="id" value="{{ $call->id }}">
                     <!-- Other input fields here -->
 
                       <div class="roww">
@@ -505,10 +505,10 @@ input[type="radio"]:checked + label {
            document.addEventListener('DOMContentLoaded', function () {
 
         // كودك هنا
-        showEditPopup(tr_program_id);
+        showEditPopup(id);
     });
-      function showEditPopup(tr_program_id) {
-    fetch(`/program/edit/${tr_program_id}`)
+      function showEditPopup(id) {
+    fetch(`/program/edit/${id}`)
         .then(response => response.json())
         .then(data => {
             console.log('Data received:', data);
@@ -554,14 +554,14 @@ function updateProgram(event) {
     formData.append('tr_program_name_ar', document.getElementById('tr_program_name_ar').value);
     formData.append('tr_program_status', document.querySelector('input[name="tr_program_status"]:checked').value);
     formData.append('tr_program_desc', document.getElementById('tr_program_desc').value);
-    formData.append('tr_program_id', document.querySelector('input[name="tr_program_id"]').value);
+    formData.append('id', document.querySelector('input[name="id"]').value);
 
     const newImage = document.getElementById('tr_program_img').files[0];
     if (newImage) {
         formData.append('tr_program_img', newImage);
     }
 
-    let url = `/program/update/${formData.get('tr_program_id')}`;
+    let url = `/program/update/${formData.get('id')}`;
 
     fetch(url, {
         method: 'POST',

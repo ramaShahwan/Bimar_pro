@@ -286,7 +286,7 @@ input:checked + label:active {
     <input type="checkbox" class="switch-button" data-id="{{ $call->tr_type_status }}" {{ $call->tr_type_status == 1 ? 'checked' : '' }}>
     <span class="slider"></span>
 </label></td> -->
-<td>   <a href=" type/{{$call->tr_type_id}}" class="btn btn-sm btn-{{$call->tr_type_status ? 'success' : 'danger'}}">
+<td>   <a href=" type/{{$call->id}}" class="btn btn-sm btn-{{$call->tr_type_status ? 'success' : 'danger'}}">
     {{$call->tr_type_status ? 'فعالة' : 'غير فعالة'}}
 </a></td>
 
@@ -295,7 +295,7 @@ input:checked + label:active {
                                         <!-- <a href="{{url('type/edit',$call->tr_type_id)}}"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></a> -->
                                         <!-- <button onclick="togglePopuoo()" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span> </button> -->
                                         <!-- <a href="show.html"><span class="las la-eye" style="font-size: 30px; color: #1cda55;"></span></a> -->
-                                        <button onclick="showEditPopup({{ $call->tr_type_id }})" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></button>
+                                        <button onclick="showEditPopup({{ $call->id }})" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></button>
 
                                     </td>
                                 </tr>
@@ -373,9 +373,9 @@ input:checked + label:active {
          <div class="content">
          <div class="close-btn" onclick="togglePopuoo()">&times;</div>
          @if(isset($call))
-         <form onsubmit="updateType(event, {{ $call->tr_type_id }})">
+         <form onsubmit="updateType(event, {{ $call->id }})">
          @csrf
-         <input type="hidden" name="tr_type_id" value="{{ $call->tr_type_id }}">
+         <input type="hidden" name="id" value="{{ $call->id }}">
             <div class="roww">
                 <h4> تعديل نوع التدريب</h4>
                 <div class="input-groupp input-groupp-icon">
@@ -445,8 +445,8 @@ input:checked + label:active {
 
     </script>
     <script>
-      function showEditPopup(tr_type_id) {
-    fetch(`/type/edit/${tr_type_id}`)
+      function showEditPopup(id) {
+    fetch(`/type/edit/${id}`)
         .then(response => response.json())
         .then(data => {
             console.log('Data received:', data);
@@ -459,7 +459,7 @@ input:checked + label:active {
             document.querySelector(`input[name="tr_type_status"][value="${data.tr_type_status}"]`).checked = true;
 
             // Assign the ID in a hidden field
-            document.querySelector('input[name="tr_type_id"]').value = tr_type_id;
+            document.querySelector('input[name="id"]').value = id;
 
             // Show the popup
             togglePopuoo();
@@ -476,10 +476,10 @@ function updateType(event) {
         tr_type_name_en: document.getElementById('tr_type_name_en').value,
         tr_type_name_ar: document.getElementById('tr_type_name_ar').value,
         tr_type_status: document.querySelector('input[name="tr_type_status"]:checked').value,
-        tr_type_id: document.querySelector('input[name="tr_type_id"]').value
+        id: document.querySelector('input[name="id"]').value
     };
 
-    let url = `/type/update/${data.tr_type_id}`;
+    let url = `/type/update/${data.id}`;
 
     fetch(url, {
         method: 'PUT',

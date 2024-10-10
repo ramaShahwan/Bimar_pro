@@ -412,7 +412,7 @@ input:checked + label:active {
             <span class="slider"></span>
         </label>
 </td> -->
-<td>   <a href=" year/{{$call->tr_year_id}}" class="btn btn-sm btn-{{$call->tr_year_status ? 'success' : 'danger'}}">
+<td>   <a href=" year/{{$call->id}}" class="btn btn-sm btn-{{$call->tr_year_status ? 'success' : 'danger'}}">
     {{$call->tr_year_status ? 'فعالة' : 'غير فعالة'}}
 </a></td>
                                       <td> {{$call->tr_year_desc}}</td>
@@ -424,7 +424,7 @@ input:checked + label:active {
             <span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span>
         </button> -->
         <!-- <button onclick="showEditPopup({{ $call->tr_year_id }})" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></button> -->
-        <button onclick="showEditPopup({{ $call->tr_year_id }})" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></button>
+        <button onclick="showEditPopup({{ $call->id }})" style="border: none;background: none;"><span class="las la-edit" style="font-size: 30px; color: #3f4046;"></span></button>
 
 
 
@@ -515,9 +515,9 @@ input:checked + label:active {
     <div class="contentt">
         <div class="close-btn" onclick="togglePopuoo()">&times;</div>
         @if(isset($call))
-        <form id="editForm" onsubmit="updateYear(event, {{ $call->tr_year_id }})">
+        <form id="editForm" onsubmit="updateYear(event, {{ $call->id }})">
             @csrf
-            <input type="hidden" name="tr_year_id" value="{{ $call->tr_year_id }}">
+            <input type="hidden" name="id" value="{{ $call->id }}">
 
             <div class="roww">
                 <h4>تعديل السنة</h4>
@@ -632,8 +632,8 @@ input:checked + label:active {
         }
 
 
-        function showEditPopup(tr_year_id) {
-    fetch(`/years/edit/${tr_year_id}`)
+        function showEditPopup(id) {
+    fetch(`/years/edit/${id}`)
         .then(response => response.json())
         .then(data => {
             console.log('Data received:', data);
@@ -649,7 +649,7 @@ input:checked + label:active {
             document.querySelector(`input[name="tr_year_status"][value="${data.tr_year_status}"]`).checked = true;
 
             // تعيين المعرف في حقل مخفي
-            document.querySelector('input[name="tr_year_id"]').value = tr_year_id;
+            document.querySelector('input[name="id"]').value = id;
 
             // إظهار النافذة
             togglePopuoo();
@@ -668,10 +668,10 @@ function updateYear(event) {
         tr_year_end_date: document.getElementById('tr_year_end_date').value,
         tr_year_status: document.querySelector('input[name="tr_year_status"]:checked').value, // القيمة هنا تمثل حالة السنة
         tr_year_desc: document.getElementById('tr_year_desc').value,
-        tr_year_id: document.querySelector('input[name="tr_year_id"]').value // الحصول على المعرف
+        id: document.querySelector('input[name="id"]').value // الحصول على المعرف
     };
 
-    let url = `/years/update/${data.tr_year_id}`; // استخدام المعرف
+    let url = `/years/update/${data.id}`; // استخدام المعرف
 
     fetch(url, {
         method: 'PUT',

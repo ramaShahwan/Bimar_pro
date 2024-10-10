@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Bimar_Course_Enrollment;
 use Illuminate\Http\Request;
+use App\Models\Bimar_Training_Program;
+use App\Models\Bimar_Training_Year;
 
 class BimarCourseEnrollmentController extends Controller
 {
@@ -14,7 +16,7 @@ class BimarCourseEnrollmentController extends Controller
     public function index()
     {
         $data = Bimar_Course_Enrollment::all();
-        return view('admin.enrollment',compact('data'));
+        return view('admin.course_enrollments',compact('data'));
     }
 
     /**
@@ -22,8 +24,23 @@ class BimarCourseEnrollmentController extends Controller
      */
     public function create()
     {
-        return view('admin.addenrollment');
+        $years = Bimar_Training_Year::all();
+        $programs = Bimar_Training_Program::all();
+        return view('admin.addcourse_enrollments')->with(['years' => $years,'programs'=> $programs]);
     }
+    public function getcourse(Request $request)
+    {
+        $courses = DB::table('bimar_training_courses')
+            ->where('tr_course_program_id', $request->tr_program_id)
+            ->get(['tr_course_id as id', 'tr_course_name_ar as name']); // التأكد من الأعمدة الصحيحة
+        if (count($courses) > 0) {
+            return response()->json($courses);
+        } else {
+            return response()->json([]);
+        }
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
