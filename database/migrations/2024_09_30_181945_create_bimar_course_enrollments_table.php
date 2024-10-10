@@ -50,7 +50,7 @@ return new class extends Migration
             $table->unsignedBigInteger('bimar_training_program_id')->nullable();
             $table->unsignedBigInteger('bimar_training_course_id')->nullable();
             $table->unsignedBigInteger('bimar_training_year_id')->nullable();
-            $table->unsignedBigInteger('bimar_training_type_id')->nullable();
+            // $table->unsignedBigInteger('bimar_training_type_id')->nullable();
 
             $table->unsignedBigInteger('tr_course_enrol_arrangement');
             $table->unsignedBigInteger('tr_course_enrol_discount')->default(0);
