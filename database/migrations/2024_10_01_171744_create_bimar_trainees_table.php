@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bimar_trainee', function (Blueprint $table) {
-            $table->id('trainee_id')->autoIncrement();
+            // $table->id('trainee_id')->autoIncrement();
+            $table->id();
             $table->string('trainee_fname_ar', 100);
             $table->string('trainee_lname_ar', 100);
             $table->string('trainee_mobile', 50);
@@ -36,22 +37,26 @@ return new class extends Migration
             $table->index('trainee_mobile');
 
             // foreign
-            $table->foreign('trainee_status')
-                  ->references('tr_users_status_id')
-                  ->on('bimar_users_status')
-                  ->onDelete('cascade');
+            $table->foreignId('bimar_users_status_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('bimar_users_gender_id')->constrained()->cascadeOnDelete()->nullable();
 
-            $table->foreign('trainee_gender')
-                  ->references('tr_users_gender_id')
-                  ->on('bimar_users_gender')
-                  ->onDelete('cascade');
 
-            $table->primary('trainee_id');
+            // $table->foreign('trainee_status')
+            //       ->references('tr_users_status_id')
+            //       ->on('bimar_users_status')
+            //       ->onDelete('cascade');
+
+            // $table->foreign('trainee_gender')
+            //       ->references('tr_users_gender_id')
+            //       ->on('bimar_users_gender')
+            //       ->onDelete('cascade');
+
+            // $table->primary('trainee_id');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('bimar_trainee');
+        Schema::dropIfExists('bimar_trainees');
     }
 };

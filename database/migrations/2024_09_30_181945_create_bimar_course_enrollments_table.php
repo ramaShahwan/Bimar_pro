@@ -9,7 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bimar_course_enrollments', function (Blueprint $table) {
-            $table->id('tr_course_enrol_id')->autoIncrement();
+            // $table->id('tr_course_enrol_id')->autoIncrement();
+            $table->id();
             $table->unsignedBigInteger('tr_course_enrol_program_id');
             $table->unsignedBigInteger('tr_course_enrol_course_id');
             $table->unsignedBigInteger('tr_course_enrol_year_id');
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->dateTime('tr_course_enrol_update_date')->nullable();
             $table->dateTime('tr_course_enrol_create_date')->useCurrent();
 
-            $table->primary('tr_course_enrol_id');
+            // $table->primary('tr_course_enrol_id');
 
             $table->timestamps();
            //index
@@ -38,10 +39,15 @@ return new class extends Migration
             $table->index('tr_course_enrol_year_id', 'TR_COURSE_ENROL_YEAR_ID_INDEX');
 
             //foreign
-            $table->foreign('tr_course_enrol_program_id')->references('tr_program_id')->on('bimar_training_programs');
-            $table->foreign('tr_course_enrol_course_id')->references('tr_course_id')->on('bimar_training_courses');
-            $table->foreign('tr_course_enrol_year_id')->references('tr_year_id')->on('bimar_training_year');
-            $table->foreign('tr_course_enrol_type')->references('tr_type_id')->on('bimar_training_type');
+            $table->foreignId('bimar_training_program_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('bimar_training_course_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('bimar_training_year_id')->constrained()->cascadeOnDelete()->nullable();
+            $table->foreignId('bimar_training_type_id')->constrained()->cascadeOnDelete()->nullable();
+
+            // $table->foreign('tr_course_enrol_program_id')->references('tr_program_id')->on('bimar_training_programs');
+            // $table->foreign('tr_course_enrol_course_id')->references('tr_course_id')->on('bimar_training_courses');
+            // $table->foreign('tr_course_enrol_year_id')->references('tr_year_id')->on('bimar_training_year');
+            // $table->foreign('tr_course_enrol_type')->references('tr_type_id')->on('bimar_training_type');
 
             // $table->charset('utf8mb4');
             // $table->collation('utf8mb4_unicode_ci');

@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 class Bimar_Training_Program extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'tr_program_id'; 
-    public $incrementing = true; 
-    protected $keyType = 'int';
+    // protected $primaryKey = 'tr_program_id'; 
+    // public $incrementing = true; 
+    // protected $keyType = 'int';
       // protected $guarded=[];
       protected $fillable = ['tr_program_code', 'tr_program_name_en', 'tr_program_name_ar', 
       'tr_program_img', 'tr_program_status','tr_program_desc'];
