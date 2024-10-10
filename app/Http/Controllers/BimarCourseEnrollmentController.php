@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Bimar_Training_Program;
 use App\Models\Bimar_Training_Year;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Bimar_Training_Type;
 
 class BimarCourseEnrollmentController extends Controller
 {
@@ -28,13 +28,14 @@ class BimarCourseEnrollmentController extends Controller
     {
         $years = Bimar_Training_Year::all();
         $programs = Bimar_Training_Program::all();
-        return view('admin.addcourse_enrollments')->with(['years' => $years,'programs'=> $programs]);
+        $types = Bimar_Training_Type::all();
+        return view('admin.addcourse_enrollments')->with(['years' => $years,'programs'=> $programs,'types'=> $types]);
     }
     public function getcourse(Request $request)
     {
         $courses = DB::table('bimar_training_courses')
-            ->where('tr_course_program_id', $request->tr_program_id)
-            ->get(['tr_course_id as id', 'tr_course_name_ar as name']); // التأكد من الأعمدة الصحيحة
+            ->where('bimar_training_course_id', $request->id)
+            ->get(['id as id', 'tr_course_name_ar as name']); 
         if (count($courses) > 0) {
             return response()->json($courses);
         } else {
@@ -88,7 +89,7 @@ class BimarCourseEnrollmentController extends Controller
      */
     public function show($id)
     {
-        $data = Bimar_Course_Enrollment::where('tr_course_enrol_id',$id)->first();
+        $data = Bimar_Course_Enrollment::where('id',$id)->first();
 
         return view('admin.enrollment_details',compact('data'));
 

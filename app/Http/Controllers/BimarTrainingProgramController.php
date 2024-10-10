@@ -98,7 +98,7 @@ class BimarTrainingProgramController extends Controller
                  File::delete(public_path('img/program/') . $oldImageName);
              }
              $newImage = $request->file('tr_program_img');
-             $newImageName = 'image_' . $data->tr_program_id . '.' . $newImage->getClientOriginalExtension();
+             $newImageName = 'image_' . $data->id . '.' . $newImage->getClientOriginalExtension();
              $newImage->move(public_path('img/program/'), $newImageName);
 
              $data->tr_program_img = $newImageName;

@@ -55,7 +55,7 @@ class BimarTrainingCourseController extends Controller
         // Store the uploaded image if present
         if ($request->hasFile('tr_course_img')) {
             $newImage = $request->file('tr_course_img');
-            $newImageName = 'image_' . $data->tr_course_id . '.' . $newImage->getClientOriginalExtension();
+            $newImageName = 'image_' . $data->id . '.' . $newImage->getClientOriginalExtension();
             $newImage->move(public_path('img/course/'), $newImageName);
             $data->tr_course_img = $newImageName;
             $data->update(); // Update after assigning the image name
@@ -127,7 +127,7 @@ class BimarTrainingCourseController extends Controller
 
                 // Upload the new image
                 $newImage = $request->file('tr_course_img');
-                $newImageName = 'image_' . $tr_course_id . '.' . $newImage->getClientOriginalExtension();
+                $newImageName = 'image_' . $course->id . '.' . $newImage->getClientOriginalExtension();
                 $newImage->move(public_path('img/course/'), $newImageName);
 
                 // Update the image name in the course
