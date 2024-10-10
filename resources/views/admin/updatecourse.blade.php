@@ -96,7 +96,7 @@ h4{
                          <!-- <option>اختر السنة التدريبية</option> -->
                          @foreach ($programs as $program)
 
-                        <option value="{{ $program->bimar_training_program_id}}" {{ $program->bimar_training_program_id == $data->bimar_training_program_id ? 'selected' : '' }}>
+                        <option value="{{ $program->id}}" {{ $program->id == $data->bimar_training_program_id ? 'selected' : '' }}>
                             {{ $program->tr_program_name_ar }}
                         </option>
                     @endforeach

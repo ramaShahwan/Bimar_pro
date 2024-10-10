@@ -316,10 +316,10 @@ body{
                           <label for="paypal"> <span><i class="fa-solid fa-xmark"></i>لا </span></label>
                         </div>
                         <div class="input-groupp">
-                        <select name="bimar_training_program_id">
+                        <select name="bimar_training_program_id" id="bimar_training_program_id">
                          <option>اختر السنة التدريبية</option>
                              @foreach ($programs as $program)
-                               <option value="{{ $program->bimar_training_program_id}}">{{ $program->tr_program_name_ar }}</option>
+                               <option value="{{ $program->id}}">{{ $program->tr_program_name_ar }}</option>
                              @endforeach
                         </select>
 

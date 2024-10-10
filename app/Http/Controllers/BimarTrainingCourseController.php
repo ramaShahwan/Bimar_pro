@@ -77,9 +77,9 @@ class BimarTrainingCourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($tr_course_id)
+    public function edit($id)
     {
-        $data = Bimar_Training_Course::find($tr_course_id);
+        $data = Bimar_Training_Course::find($id);
         $programs = Bimar_Training_Program::all();
         return view('admin.updatecourse', compact('data','programs'));
         // if (!$course) {
@@ -93,7 +93,7 @@ class BimarTrainingCourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $tr_course_id)
+    public function update(Request $request, $id)
     {
 
             // Validate incoming data
@@ -106,7 +106,7 @@ class BimarTrainingCourseController extends Controller
             ]);
 
             // Retrieve the current course to verify its existence
-            $course = Bimar_Training_Course::findOrFail($tr_course_id);
+            $course = Bimar_Training_Course::findOrFail($id);
             $oldImageName = $course->tr_course_img;
 
             // Update course data
@@ -137,13 +137,9 @@ class BimarTrainingCourseController extends Controller
             // Save changes to the database
             $course->save();
 
-      
-            // return response()->json(['message' => 'تم التعديل بنجاح'], 200);
-            // return redirect()->back()->with(['message'=>'تم التعديل']);
-            // $data = Bimar_Training_Course::all();
-            // $programs = Bimar_Training_Program::all();
+
+
             return redirect()->route('courses')->with(['message'=>'تم التعديل']);
-            // return view('admin.courses')->with(['data' => $data,'programs'=> $programs,'message'=>'تم التعديل']);
     }
 
 

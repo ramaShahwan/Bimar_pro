@@ -41,7 +41,7 @@ h4{
                             <select name="bimar_training_year_id" id="bimar_training_year_id">
                          <option>اختر السنة التدريبية</option>
                              @foreach ($years as $year)
-                               <option value="{{ $year->bimar_training_year_id }}">{{ $year->tr_year_name }}</option>
+                               <option value="{{ $year->id }}">{{ $year->tr_year_name }}</option>
                              @endforeach
                         </select>
 
@@ -50,7 +50,7 @@ h4{
                             <select class=" @error('bimar_training_program_id') is-invalid @enderror" name="bimar_training_program_id" id="bimar_training_program_id" aria-label="Default select example" >
         <option selected> اختر البرنامج التدريبي</option>
         @foreach ($programs as $program)
-  <option value="{{ $program->bimar_training_program_id }}">{{ $program->tr_program_name_ar }}</option>
+  <option value="{{ $program->id }}">{{ $program->tr_program_name_ar }}</option>
   @endforeach
 </select>
 
@@ -118,7 +118,7 @@ h4{
                         <select name="bimar_training_type_id" id="bimar_training_type_id">
                          <option>اختر  نوع التدريب</option>
                              @foreach ($types as $type)
-                               <option value="{{ $type->bimar_training_type_id }}">{{ $type->tr_year_name }}</option>
+                               <option value="{{ $type->id }}">{{ $type->tr_year_name }}</option>
                              @endforeach
                         </select>
 

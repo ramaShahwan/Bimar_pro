@@ -6,7 +6,7 @@ use App\Models\Bimar_Course_Enrollment;
 use Illuminate\Http\Request;
 use App\Models\Bimar_Training_Program;
 use App\Models\Bimar_Training_Year;
-
+use App\Models\Bimar_Training_Type;
 class BimarCourseEnrollmentController extends Controller
 {
 
@@ -26,7 +26,8 @@ class BimarCourseEnrollmentController extends Controller
     {
         $years = Bimar_Training_Year::all();
         $programs = Bimar_Training_Program::all();
-        return view('admin.addcourse_enrollments')->with(['years' => $years,'programs'=> $programs]);
+        $types = Bimar_Training_Type::all();
+        return view('admin.addcourse_enrollments')->with(['years' => $years,'programs'=> $programs,'types'=> $types]);
     }
     public function getcourse(Request $request)
     {
