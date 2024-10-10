@@ -139,7 +139,7 @@ class BimarTrainingCourseController extends Controller
             return response()->json(['message' => 'تم التعديل بنجاح'], 200);
         } catch (\Exception $e) {
             // Log the error for debugging
-            \Log::error('Error updating course: ' . $e->getMessage());
+            // \Log::error('Error updating course: ' . $e->getMessage());
             return response()->json(['message' => 'حدث خطأ أثناء التعديل: ' . $e->getMessage()], 500);
         }
     }
