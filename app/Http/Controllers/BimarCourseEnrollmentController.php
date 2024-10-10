@@ -6,6 +6,8 @@ use App\Models\Bimar_Course_Enrollment;
 use Illuminate\Http\Request;
 use App\Models\Bimar_Training_Program;
 use App\Models\Bimar_Training_Year;
+use Illuminate\Support\Facades\DB;
+
 
 class BimarCourseEnrollmentController extends Controller
 {
