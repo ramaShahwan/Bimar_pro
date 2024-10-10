@@ -6,14 +6,50 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    // public function up(): void
+    // {
+    //     Schema::create('bimar_course_enrollments', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->unsignedBigInteger('bimar_training_program_id')->nullable();
+    //         $table->unsignedBigInteger('bimar_training_course_id')->nullable();
+    //         $table->unsignedBigInteger('bimar_training_year_id')->nullable();
+    //         $table->unsignedBigInteger('tr_course_enrol_arrangement');
+    //         $table->unsignedBigInteger('tr_course_enrol_discount')->default(0);
+    //         $table->text('tr_course_enrol_desc')->nullable();
+    //         $table->date('tr_course_enrol_reg_start_date')->nullable();
+    //         $table->date('tr_course_enrol_reg_end_date')->nullable();
+    //         $table->date('tr_course_enrol_session_start_date')->nullable();
+    //         $table->date('tr_course_enrol_session_end_date')->nullable();
+    //         $table->integer('tr_course_enrol_mark')->nullable();
+    //         $table->float('tr_course_enrol_oralmark', 5, 2)->nullable();
+    //         $table->float('tr_course_enrol_finalmark', 5, 2)->nullable();
+    //         $table->float('tr_course_enrol_price');
+    //         $table->unsignedBigInteger('tr_course_enrol_type');
+    //         $table->unsignedBigInteger('tr_course_enrol_status')->default(0);
+    //         $table->dateTime('tr_course_enrol_update_date')->nullable();
+    //         $table->dateTime('tr_course_enrol_create_date')->useCurrent();
+    //         $table->timestamps();
+        
+    //         // فهارس
+    //         $table->index('bimar_training_program_id', 'TR_COURSE_ENROL_PROGRAM_ID_INDEX');
+    //         $table->index('bimar_training_course_id', 'TR_COURSE_ENROL_COURSE_ID_INDEX');
+    //         $table->index('bimar_training_year_id', 'TR_COURSE_ENROL_YEAR_ID_INDEX');
+        
+    //         // مفاتيح خارجية
+    //         $table->foreign('bimar_training_program_id')->references('id')->on('bimar_training_programs')->cascadeOnDelete();
+    //         $table->foreign('bimar_training_course_id')->references('id')->on('bimar_training_courses')->cascadeOnDelete();
+    //         $table->foreign('bimar_training_year_id')->references('id')->on('bimar_training_years')->cascadeOnDelete();
+    //         $table->foreignId('bimar_training_type_id')->constrained()->cascadeOnDelete()->nullable();
+    //     });  
+    // }
+
     public function up(): void
     {
         Schema::create('bimar_course_enrollments', function (Blueprint $table) {
-            // $table->id('tr_course_enrol_id')->autoIncrement();
             $table->id();
-            $table->unsignedBigInteger('tr_course_enrol_program_id');
-            $table->unsignedBigInteger('tr_course_enrol_course_id');
-            $table->unsignedBigInteger('tr_course_enrol_year_id');
+            $table->unsignedBigInteger('bimar_training_program_id')->nullable();
+            $table->unsignedBigInteger('bimar_training_course_id')->nullable();
+            $table->unsignedBigInteger('bimar_training_year_id')->nullable();
             $table->unsignedBigInteger('tr_course_enrol_arrangement');
             $table->unsignedBigInteger('tr_course_enrol_discount')->default(0);
             $table->text('tr_course_enrol_desc')->nullable();
@@ -29,30 +65,32 @@ return new class extends Migration
             $table->unsignedBigInteger('tr_course_enrol_status')->default(0);
             $table->dateTime('tr_course_enrol_update_date')->nullable();
             $table->dateTime('tr_course_enrol_create_date')->useCurrent();
-
-            // $table->primary('tr_course_enrol_id');
-
             $table->timestamps();
-           //index
-            $table->index('tr_course_enrol_program_id', 'TR_COURSE_ENROL_PROGRAM_ID_INDEX');
-            $table->index('tr_course_enrol_course_id', 'TR_COURSE_ENROL_COURSE_ID_INDEX');
-            $table->index('tr_course_enrol_year_id', 'TR_COURSE_ENROL_YEAR_ID_INDEX');
 
-            //foreign
-            $table->foreignId('bimar_training_program_id')->constrained()->cascadeOnDelete()->nullable();
-            $table->foreignId('bimar_training_course_id')->constrained()->cascadeOnDelete()->nullable();
-            $table->foreignId('bimar_training_year_id')->constrained()->cascadeOnDelete()->nullable();
-            $table->foreignId('bimar_training_type_id')->constrained()->cascadeOnDelete()->nullable();
+            // indexes
+            $table->index('bimar_training_program_id', 'TR_COURSE_ENROL_PROGRAM_ID_INDEX');
+            $table->index('bimar_training_course_id', 'TR_COURSE_ENROL_COURSE_ID_INDEX');
+            $table->index('bimar_training_year_id', 'TR_COURSE_ENROL_YEAR_ID_INDEX');
 
-            // $table->foreign('tr_course_enrol_program_id')->references('tr_program_id')->on('bimar_training_programs');
-            // $table->foreign('tr_course_enrol_course_id')->references('tr_course_id')->on('bimar_training_courses');
-            // $table->foreign('tr_course_enrol_year_id')->references('tr_year_id')->on('bimar_training_year');
-            // $table->foreign('tr_course_enrol_type')->references('tr_type_id')->on('bimar_training_type');
+            // foreigns
+            if (Schema::hasTable('bimar_training_programs')) {
+                $table->foreign('bimar_training_program_id')->references('id')->on('bimar_training_programs')->cascadeOnDelete();
+            }
 
-            // $table->charset('utf8mb4');
-            // $table->collation('utf8mb4_unicode_ci');
+            if (Schema::hasTable('bimar_training_courses')) {
+                $table->foreign('bimar_training_course_id')->references('id')->on('bimar_training_courses')->cascadeOnDelete();
+            }
+
+            if (Schema::hasTable('bimar_training_years')) {
+                $table->foreign('bimar_training_year_id')->references('id')->on('bimar_training_years')->cascadeOnDelete();
+            }
+
+            if (Schema::hasTable('bimar_training_types')) {
+                $table->foreignId('bimar_training_type_id')->constrained()->cascadeOnDelete()->nullable();
+            }
         });
     }
+
 
     public function down(): void
     {

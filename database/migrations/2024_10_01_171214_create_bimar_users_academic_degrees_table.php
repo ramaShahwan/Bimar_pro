@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bimar_users_academic_degree', function (Blueprint $table) {
+        Schema::create('bimar_users_academic_degrees', function (Blueprint $table) {
             // $table->id('tr_users_degree_id')->autoIncrement();
             $table->id();
             $table->string('tr_users_degree_name_en', 45);

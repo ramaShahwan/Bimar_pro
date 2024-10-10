@@ -31,8 +31,8 @@ class BimarTrainingYearController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tr_year_name' => 'required|unique:bimar_training_year',
-            'tr_year' => 'required|unique:bimar_training_year',
+            'tr_year_name' => 'required|unique:bimar_training_years',
+            'tr_year' => 'required|unique:bimar_training_years',
             'tr_year_start_date' => 'required',
             'tr_year_end_date' => 'required',
           ]);

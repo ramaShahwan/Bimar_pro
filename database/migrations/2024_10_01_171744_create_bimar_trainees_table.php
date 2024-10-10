@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bimar_trainee', function (Blueprint $table) {
+        Schema::create('bimar_trainees', function (Blueprint $table) {
             // $table->id('trainee_id')->autoIncrement();
             $table->id();
             $table->string('trainee_fname_ar', 100);
@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('trainee_mobile', 50);
             $table->string('trainee_email', 50);
             $table->unsignedBigInteger('trainee_gender');
+            $table->unsignedBigInteger('bimar_users_status_id');
+            $table->unsignedBigInteger('bimar_users_gender_id');
+
             $table->string('trainee_address', 255)->nullable();
             $table->string('trainee_personal_img', 200)->nullable();
             $table->string('trainee_pass', 255);
@@ -37,9 +40,16 @@ return new class extends Migration
             $table->index('trainee_mobile');
 
             // foreign
-            $table->foreignId('bimar_users_status_id')->constrained()->cascadeOnDelete()->nullable();
-            $table->foreignId('bimar_users_gender_id')->constrained()->cascadeOnDelete()->nullable();
+            // $table->foreignId('bimar_users_status_id')->constrained()->cascadeOnDelete()->nullable();
+            // $table->foreignId('bimar_users_gender_id')->constrained()->cascadeOnDelete()->nullable();
 
+            if (Schema::hasTable('bimar_users_statuses')) {
+                $table->foreign('bimar_users_status_id')->references('id')->on('bimar_users_statuses')->cascadeOnDelete();
+            }
+
+            if (Schema::hasTable('bimar_users_genders')) {
+                $table->foreign('bimar_users_gender_id')->references('id')->on('bimar_users_genders')->cascadeOnDelete();
+            }
 
             // $table->foreign('trainee_status')
             //       ->references('tr_users_status_id')

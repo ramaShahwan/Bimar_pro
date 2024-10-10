@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('tr_course_name_en');
             $table->string('tr_course_name_ar');
             $table->string('tr_course_img', 200)->nullable();
-            $table->unsignedBigInteger('tr_course_program_id');
+            // $table->unsignedBigInteger('bimar_training_program_id');
             $table->text('tr_course_desc')->nullable();
             $table->integer('tr_course_status')->default(0);
             $table->integer('tr_is_diploma')->default(0);
@@ -27,14 +27,15 @@ return new class extends Migration
             // $table->charset('utf8mb4');
             // $table->collation('utf8mb4_unicode_ci');
             $table->timestamps();
-            
-            // index
-            $table->index('tr_course_program_id', 'TR_COURSE_PROGRAM_ID_INDEX');
-            $table->index('tr_course_status', 'TR_COURSE_STATUS_INDEX');
 
             // foreign
+             $table->foreignId('bimar_training_program_id')->constrained()->cascadeOnDelete()->nullable();
 
-            $table->foreignId('bimar_training_program_id')->constrained()->cascadeOnDelete()->nullable();
+            // index
+            $table->index('bimar_training_program_id', 'TR_COURSE_PROGRAM_ID_INDEX');
+            $table->index('tr_course_status', 'TR_COURSE_STATUS_INDEX');
+
+
 
             // $table->foreign('tr_course_program_id')
             //       ->references('tr_program_id')

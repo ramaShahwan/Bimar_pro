@@ -12,7 +12,7 @@ return new class extends Migration
  
     public function up(): void
     {
-        Schema::create('bimar_training_type', function (Blueprint $table) {
+        Schema::create('bimar_training_types', function (Blueprint $table) {
             // $table->id('tr_type_id')->autoIncrement();
             $table->id();
             $table->string('tr_type_name_en', 45);

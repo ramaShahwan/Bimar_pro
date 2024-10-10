@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('bimar_training_year', function (Blueprint $table) {
+        Schema::create('bimar_training_years', function (Blueprint $table) {
             // $table->id('tr_year_id')->autoIncrement();
             $table->id();
             $table->string('tr_year_name');

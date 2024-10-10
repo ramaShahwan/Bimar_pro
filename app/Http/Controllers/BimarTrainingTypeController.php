@@ -46,8 +46,8 @@ class BimarTrainingTypeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tr_type_name_en' => 'required|unique:bimar_training_type',
-            'tr_type_name_ar' => 'required|unique:bimar_training_type',
+            'tr_type_name_en' => 'required|unique:bimar_training_types',
+            'tr_type_name_ar' => 'required|unique:bimar_training_types',
           ]);
 
         $data = new bimar_training_type;
