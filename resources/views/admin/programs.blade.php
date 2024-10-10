@@ -307,8 +307,8 @@ input[type="radio"]:checked + label {
                             @foreach($data as $call)
                                 <tr>
                                     <td>{{$call->tr_program_code}} </td>
-                                    <td>{{$call->tr_program_name_en}}</td>
                                     <td>{{$call->tr_program_name_ar}}</td>
+                                    <td>{{$call->tr_program_name_en}}</td>
                                     <td><img src="{{URL::asset('/img/program/'.$call->tr_program_img)}}" alt="" class="bg-img" height="40px" width="40px"></td>
                                     <!-- <td><label class="switch">
 
