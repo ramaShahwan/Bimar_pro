@@ -39,6 +39,8 @@ class BimarCourseEnrollmentController extends Controller
             ->get(['id as id', 'tr_course_name_ar as name']);
 
         return response()->json($courses);
+    //     $courses = Bimar_Training_Course::where('bimar_training_program_id', $request->bimar_training_program_id)->get();
+    // return response()->json($courses);
     }
 
 
@@ -98,15 +100,21 @@ class BimarCourseEnrollmentController extends Controller
      */
     public function edit($id)
     {
-        $data = Bimar_Course_Enrollment::findOrFail($id);
-        $type = Bimar_Training_Type::all();
-        $year = Bimar_Training_Year::all();
-        $program = Bimar_Training_Program::all();
-        $course = Bimar_Training_Course::all();
+        $data = Bimar_Course_Enrollment::findOrFail($id); // تحميل بيانات التسجيل الحالية
+        $types = Bimar_Training_Type::all();
+        $years = Bimar_Training_Year::all();
+        $programs = Bimar_Training_Program::all(); // جميع البرامج المتاحة
 
-        return view('admin.updateenrollment', compact('data','type','year'));
+        // الحصول على البرنامج والكورس المرتبطين بالسجل
+        $my_program = Bimar_Training_Program::find($data->bimar_training_program_id);
+        $my_course = Bimar_Training_Course::find($data->bimar_training_course_id);
 
+        return view('admin.updatecourse_enr', compact('data', 'types', 'years', 'programs', 'my_program', 'my_course'));
     }
+
+
+
+
 
     /**
      * Update the specified resource in storage.
