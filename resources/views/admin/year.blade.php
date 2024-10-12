@@ -469,20 +469,39 @@ input:checked + label:active {
                         <h4>سنة جديدة</h4>
                         <div class="input-groupp input-groupp-icon">
                             <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          <input type="text" placeholder="اسم السنة" name="tr_year_name"/>
-
+                          <input type="text" placeholder="اسم السنة" name="tr_year_name" class="@error('tr_year_name') is-invalid @enderror"/>
+                          @error('tr_year_name')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
-                          <input type="number" placeholder="السنة" name="tr_year"/>
+                          <input type="number" placeholder="السنة" name="tr_year" class="@error('tr_year') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                          @error('tr_year')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
-                          <input type="date" placeholder="تاريخ بداية السنة" style="padding-bottom: 0;" name="tr_year_start_date"/>
+                          <input type="date" placeholder="تاريخ بداية السنة" style="padding-bottom: 0;" name="tr_year_start_date" class="@error('tr_year_start_date') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                          @error('tr_year_start_date')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
-                            <input type="date" placeholder="تاريخ نهاية السنة" style="padding-bottom: 0;" name="tr_year_end_date"/>
+                            <input type="date" placeholder="تاريخ نهاية السنة" style="padding-bottom: 0;" name="tr_year_end_date" class="@error('tr_year_end_date') is-invalid @enderror"/>
                             <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                            @error('tr_year_end_date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                           </div>
                       </div>
 
@@ -523,22 +542,42 @@ input:checked + label:active {
                 <h4>تعديل السنة</h4>
                 <div class="input-groupp input-groupp-icon">
                     <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                    <input type="text" id="tr_year_name" name="tr_year_name" value="{{ $call->tr_year_name }}">
+                    <input type="text" id="tr_year_name" name="tr_year_name" value="{{ $call->tr_year_name }}" class="@error('tr_year_name') is-invalid @enderror">
+                    @error('tr_year_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 </div>
 
                 <div class="input-groupp input-groupp-icon">
-                    <input type="number" name="tr_year" id="tr_year" value="{{ $call->tr_year }}"/>
+                    <input type="number" name="tr_year" id="tr_year" value="{{ $call->tr_year }}" class="@error('tr_year') is-invalid @enderror"/>
                     <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                    @error('tr_year')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 </div>
 
                 <div class="input-groupp input-groupp-icon">
-                    <input type="date" name="tr_year_start_date" id="tr_year_start_date" placeholder="تاريخ بداية السنة" style="padding-bottom: 0;" value="{{ $call->tr_year_start_date }}"/>
+                    <input type="date" name="tr_year_start_date" id="tr_year_start_date" placeholder="تاريخ بداية السنة" style="padding-bottom: 0;" value="{{ $call->tr_year_start_date }}" class="@error('tr_year_start_date') is-invalid @enderror"/>
                     <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                    @error('tr_year_start_date')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 </div>
 
                 <div class="input-groupp input-groupp-icon">
-                    <input type="date" name="tr_year_end_date" id="tr_year_end_date" placeholder="تاريخ نهاية السنة" style="padding-bottom: 0;" value="{{ $call->tr_year_end_date }}"/>
+                    <input type="date" name="tr_year_end_date" id="tr_year_end_date" placeholder="تاريخ نهاية السنة" style="padding-bottom: 0;" value="{{ $call->tr_year_end_date }}" class="@error('tr_year_end_date') is-invalid @enderror"/>
                     <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                    @error('tr_year_end_date')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 </div>
             </div>
 

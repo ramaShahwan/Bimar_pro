@@ -283,19 +283,36 @@ body{
                         <h4>دورة جديدة</h4>
                         <div class="input-groupp input-groupp-icon">
                             <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          <input type="text" placeholder="رمز الدورة" name="tr_course_code" id="tr_course_code"/>
+                          <input type="text" placeholder="رمز الدورة" name="tr_course_code" id="tr_course_code" class="@error('tr_course_code') is-invalid @enderror"/>
+                          @error('tr_course_code')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+                        </div>
 
-                        </div>
                         <div class="input-groupp input-groupp-icon">
-                          <input type="text" placeholder="الاسم باللغة العربية" name="tr_course_name_ar" id="tr_course_name_ar"/>
+                          <input type="text" placeholder="الاسم باللغة العربية" name="tr_course_name_ar" id="tr_course_name_ar" class="@error('tr_course_name_ar') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                          @error('tr_course_name_ar')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
+
                         <div class="input-groupp input-groupp-icon">
-                          <input type="text" placeholder=" الاسم باللغة الانكليزية" style="padding-bottom: 0;" name="tr_course_name_en" id="tr_course_name_en"/>
+                          <input type="text" placeholder=" الاسم باللغة الانكليزية" style="padding-bottom: 0;" name="tr_course_name_en" id="tr_course_name_en" class="@error('tr_course_name_en') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                          @error('tr_course_name_en')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
+
                         <div class="input-groupp input-groupp-icon">
-                            <input type="file" placeholder="الصورة  " style="padding-bottom: 0;" name="tr_course_img" id="tr_course_img"/>
+                            <input type="file" placeholder="الصورة  " style="padding-bottom: 0;" name="tr_course_img" id="tr_course_img" />
                             <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
                           </div>
                       </div>
@@ -316,13 +333,17 @@ body{
                           <label for="paypal"> <span><i class="fa-solid fa-xmark"></i>لا </span></label>
                         </div>
                         <div class="input-groupp">
-                        <select name="bimar_training_program_id" id="bimar_training_program_id">
+                        <select name="bimar_training_program_id" id="bimar_training_program_id" class="@error('bimar_training_program_id') is-invalid @enderror">
                          <option>اختر البرنامج التدريبي</option>
                              @foreach ($programs as $program)
                                <option value="{{ $program->id}}">{{ $program->tr_program_name_ar }}</option>
                              @endforeach
                         </select>
-
+                        @error('bimar_training_program_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
 
                             </div>
                         <div class="input-groupp input-groupp-icon">
