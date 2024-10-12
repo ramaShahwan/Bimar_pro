@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Bimar_Training_Program;
 use App\Models\Bimar_Training_Year;
 use App\Models\Bimar_Training_Type;
+use App\Models\Bimar_Training_Course;
+
 use Illuminate\Support\Facades\DB;
 class BimarCourseEnrollmentController extends Controller
 {
@@ -97,7 +99,13 @@ class BimarCourseEnrollmentController extends Controller
     public function edit($id)
     {
         $data = Bimar_Course_Enrollment::findOrFail($id);
-        return view('admin.updateenrollment', compact('data'));
+        $type = Bimar_Training_Type::all();
+        $year = Bimar_Training_Year::all();
+        $program = Bimar_Training_Program::all();
+        $course = Bimar_Training_Course::all();
+
+        return view('admin.updateenrollment', compact('data','type','year'));
+
     }
 
     /**
