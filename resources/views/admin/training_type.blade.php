@@ -336,12 +336,21 @@ input:checked + label:active {
                         <h4>نوع جديد </h4>
                         <div class="input-groupp input-groupp-icon">
                             <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          <input type="text" placeholder=" الاسم باللغة العربية" name="tr_type_name_ar"/>
-
+                          <input type="text" placeholder=" الاسم باللغة العربية" name="tr_type_name_ar" class="@error('tr_type_name_ar') is-invalid @enderror"/>
+                          @error('tr_type_name_ar')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
-                          <input type="text" placeholder="الاسم باللغة الانكليزية" name="tr_type_name_en"/>
+                          <input type="text" placeholder="الاسم باللغة الانكليزية" name="tr_type_name_en" class="@error('tr_type_name_en') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                          @error('tr_type_name_en')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
 
 
@@ -380,11 +389,22 @@ input:checked + label:active {
                 <h4> تعديل نوع التدريب</h4>
                 <div class="input-groupp input-groupp-icon">
                     <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                    <input type="text" id="tr_type_name_ar" name="tr_type_name_ar" placeholder="الاسم باللغة العربية" value="{{ $call->tr_type_name_ar }}"/>
+                    <input type="text" id="tr_type_name_ar" name="tr_type_name_ar" placeholder="الاسم باللغة العربية" value="{{ $call->tr_type_name_ar }}" class="@error('tr_type_name_ar') is-invalid @enderror"/>
+                    @error('tr_type_name_ar')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 </div>
                 <div class="input-groupp input-groupp-icon">
-                    <input type="text" id="tr_type_name_en" name="tr_type_name_en" placeholder="الاسم باللغة الانكليزية" value="{{ $call->tr_type_name_en }}"/>
+                    <input type="text" id="tr_type_name_en" name="tr_type_name_en" placeholder="الاسم باللغة الانكليزية" value="{{ $call->tr_type_name_en }}" class="@error('tr_type_name_en') is-invalid @enderror"/>
+
                     <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                    @error('tr_type_name_en')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 </div>
             </div>
 

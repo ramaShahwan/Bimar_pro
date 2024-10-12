@@ -363,16 +363,30 @@ input[type="radio"]:checked + label {
                         <h4>برنامج جديد</h4>
                         <div class="input-groupp input-groupp-icon">
                             <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          <input type="text" placeholder="رمز البرنامج" name="tr_program_code"/>
-
+                          <input type="text" placeholder="رمز البرنامج" name="tr_program_code" class="@error('tr_program_code') is-invalid @enderror"/>
+                          @error('tr_program_code')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
-                          <input type="text" placeholder="الاسم باللغة العربية" name="tr_program_name_ar"/>
+                          <input type="text" placeholder="الاسم باللغة العربية" name="tr_program_name_ar" class="@error('tr_program_name_ar') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                          @error('tr_program_name_ar')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
-                          <input type="text" placeholder=" الاسم باللغة الانكليزية" style="padding-bottom: 0;" name="tr_program_name_en"/>
+                          <input type="text" placeholder=" الاسم باللغة الانكليزية" style="padding-bottom: 0;" name="tr_program_name_en" class="@error('tr_program_name_en') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                          @error('tr_program_name_en')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
                             <input type="file"  placeholder="الصورة  " style="padding-bottom: 0;" name="tr_program_img"/>
@@ -418,16 +432,30 @@ input[type="radio"]:checked + label {
                         <h4> تعديل البرنامج</h4>
                         <div class="input-groupp input-groupp-icon">
                             <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          <input type="text" placeholder="رمز البرنامج " value="{{ $call->tr_program_code }}" name="tr_program_code" id="tr_program_code"/>
-
+                          <input type="text" placeholder="رمز البرنامج " value="{{ $call->tr_program_code }}" name="tr_program_code" id="tr_program_code" class="@error('tr_program_code') is-invalid @enderror"/>
+                          @error('tr_program_code')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
-                          <input type="text" placeholder="الاسم باللغة العربية" value="{{ $call->tr_program_name_ar }}" name="tr_program_name_ar" id="tr_program_name_ar"/>
+                          <input type="text" placeholder="الاسم باللغة العربية" value="{{ $call->tr_program_name_ar }}" name="tr_program_name_ar" id="tr_program_name_ar" class="@error('tr_program_name_ar') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                          @error('tr_program_name_ar')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
-                          <input type="text" placeholder="  الاسم باللغة الانكليزية" style="padding-bottom: 0;" name="tr_program_name_en" id="tr_program_name_en" value="{{ $call->tr_program_name_en }}"/>
+                          <input type="text" placeholder="  الاسم باللغة الانكليزية" style="padding-bottom: 0;" name="tr_program_name_en" id="tr_program_name_en" value="{{ $call->tr_program_name_en }}" class="@error('tr_program_name_en') is-invalid @enderror"/>
                           <div class="input-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                          @error('tr_program_name_en')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="">
                         <img id="current_program_img" src="" style="display: none; " alt="Current Program Image" class="bg-img" height="170px" width="170px">
