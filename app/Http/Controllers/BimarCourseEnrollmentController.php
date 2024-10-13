@@ -91,7 +91,7 @@ class BimarCourseEnrollmentController extends Controller
     {
         $data = Bimar_Course_Enrollment::where('id',$id)->first();
 
-        return view('admin.enrollment_details',compact('data'));
+        return view('admin.showcourse_enr',compact('data'));
 
     }
 
@@ -147,9 +147,10 @@ class BimarCourseEnrollmentController extends Controller
        $data->bimar_training_type_id = $request->bimar_training_type_id;
        $data->tr_course_enrol_status = $request->tr_course_enrol_status;
        $data->tr_course_enrol_update_date = now();
+    //    dd($data);
        $data->update();
 
-      return redirect()->back()->with('message','تم التعديل');
+       return redirect()->route('courses')->with(['message'=>'تم التعديل']);
     }
 
     /**

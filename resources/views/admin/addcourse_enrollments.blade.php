@@ -182,7 +182,7 @@ h4{
 
                         <div class="input-groupp input-groupp-icon">
                             <input type="text" placeholder="رسوم التسجيل" name="tr_course_enrol_price"  class="@error('tr_course_enrol_price') is-invalid @enderror"/>
-                            <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
+                            <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week" ></i></div>
                             @error('tr_course_enrol_price')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

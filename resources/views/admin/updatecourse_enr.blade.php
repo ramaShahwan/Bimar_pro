@@ -31,14 +31,15 @@ h4{
 </style>
 <div id="page-wrapper">
             <div class="containerr">
-            <form action="{{url('course_enrollments//update',$data->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{url('course_enrollments/update',$data->id)}}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
                       <div class="roww">
 
                         <h4>تسجيل جديد</h4>
 
                             <div class="input-groupp">
-                            <select name="bimar_training_year_id" id="bimar_training_year_id">
+                            <select name="bimar_training_year_id" id="bimar_training_year_id" class="@error('bimar_training_year_id') is-invalid @enderror">
                          <option>اختر السنة التدريبية</option>
                              @foreach ($years as $year)
                              <option value="{{ $year->id}}" {{ $year->id == $data->bimar_training_year_id ? 'selected' : '' }}>
@@ -49,6 +50,11 @@ h4{
 
 
                         </select>
+                        @error('bimar_training_year_id')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
 
                             </div>
                             <div class="input-groupp input-groupp-icon">
@@ -60,6 +66,11 @@ h4{
             </option>
         @endforeach
     </select>
+    @error('bimar_training_program_id')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
 </div>
 
 <div class="input-groupp input-groupp-icon">
@@ -70,6 +81,11 @@ h4{
             <option value="">-- اختر الكورس التدريبي --</option>
         @endif
     </select>
+    @error('bimar_training_course_id')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
 </div>
 
 
@@ -78,8 +94,12 @@ h4{
 
                         <div class="input-groupp input-groupp-icon">
                             <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
-                          <input type="number" placeholder="رقم(ترتيب) الدورة التدريبية" name="tr_course_enrol_arrangement" value="{{$data-> tr_course_enrol_arrangement}}"/>
-
+                          <input type="number" placeholder="رقم(ترتيب) الدورة التدريبية" name="tr_course_enrol_arrangement" value="{{$data-> tr_course_enrol_arrangement}}" class="@error('tr_course_enrol_arrangement') is-invalid @enderror"/>
+                          @error('tr_course_enrol_arrangement')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
                         </div>
                         <div class="input-groupp input-groupp-icon">
                           <input type="number" placeholder="نسبة الحسم على الدورة" name="tr_course_enrol_discount" value="{{$data-> tr_course_enrol_discount}}"/>
@@ -127,7 +147,7 @@ h4{
                             <div class="input-icon"><i class="fa-sharp fa-solid fa-calendar-week"></i></div>
                           </div>
                         <div class="input-groupp input-groupp-icon">
-                        <select name="bimar_training_type_id" id="bimar_training_type_id">
+                        <select name="bimar_training_type_id" id="bimar_training_type_id" class="@error('bimar_training_type_id') is-invalid @enderror">
                          <option>اختر  نوع التدريب</option>
                              @foreach ($types as $type)
                                <option value="{{ $type->id}}" {{ $type->id == $data->bimar_training_type_id ? 'selected' : '' }}>
@@ -137,6 +157,11 @@ h4{
                              @endforeach
 
                         </select>
+                        @error('bimar_training_type_id')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
 
 
                         </div>
