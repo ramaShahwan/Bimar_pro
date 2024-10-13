@@ -84,6 +84,7 @@ Route::get('/type/edit/{id}', [BimarTrainingTypeController::class, 'edit'])->nam
 Route::put('/type/update/{id}', [BimarTrainingTypeController::class, 'update'])->name('type.update');
 Route::get('course/{id}', [BimarTrainingCourseController::class, 'updatSwitch']);
 Route::get('course_enrollments/{id}', [BimarCourseEnrollmentController::class, 'updatSwitch']);
+Route::get('course_enrollments/show/{id}', [BimarCourseEnrollmentController::class, 'show']);
 // Route::get('/course/edit/{tr_course_id}', [BimarTrainingCourseController::class, 'edit'])->name('course.edit');
 // Route::post('/course/update/{tr_course_id}', [BimarTrainingCourseController::class, 'update'])->name('course.update');
 
