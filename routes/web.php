@@ -4,6 +4,12 @@ use App\Http\Controllers\BimarTrainingProgramController;
 use App\Http\Controllers\BimarTrainingTypeController;
 use App\Http\Controllers\BimarTrainingCourseController;
 use App\Http\Controllers\BimarCourseEnrollmentController;
+
+use App\Http\Controllers\BimarRolesController;
+use App\Http\Controllers\BimarUserAcademicDegreeController;
+use App\Http\Controllers\BimarUserGenderController;
+use App\Http\Controllers\BimarUsersStatusController;
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +71,42 @@ Route::prefix('program')->controller(BimarTrainingProgramController::class)->gro
     Route::get('/create', 'create');
     Route::post('/store', 'store');
 });
+
+//new routes
+Route::prefix('status')->controller(BimarUsersStatusController::class)->group(function(){
+    Route::get('/index','index');
+    Route::get('/create', 'create');
+    Route::post('/store', 'store');
+    Route::get('/edit/{id}', 'edit');
+    Route::put('/update/{id}', 'update');
+    Route::get('updateSwitch/{id}','updateSwitch');
+});
+Route::prefix('gender')->controller(BimarUserGenderController::class)->group(function(){
+    Route::get('/index','index');
+    Route::get('/create', 'create');
+    Route::post('/store', 'store');
+    Route::get('/edit/{id}', 'edit');
+    Route::put('/update/{id}', 'update');
+    Route::get('updateSwitch/{id}','updateSwitch');
+});
+Route::prefix('role')->controller(BimarRolesController::class)->group(function(){
+    Route::get('/index','index');
+    Route::get('/create', 'create');
+    Route::post('/store', 'store');
+    Route::get('/edit/{id}', 'edit');
+    Route::put('/update/{id}', 'update');
+    Route::get('updateSwitch/{id}','updateSwitch');
+});
+Route::prefix('grade')->controller(BimarUserAcademicDegreeController::class)->group(function(){
+    Route::get('/index','index');
+    Route::get('/create', 'create');
+    Route::post('/store', 'store');
+    Route::get('/edit/{id}', 'edit');
+    Route::put('/update/{id}', 'update');
+    Route::get('updateSwitch/{id}','updateSwitch');
+});
+
+
 Route::get('getcourse', [BimarCourseEnrollmentController::class, 'getcourse'])->name('getcourse');
 
 Route::post('/update-switch/{id}', [BimarTrainingYearController::class, 'updateSwitchStatus']);

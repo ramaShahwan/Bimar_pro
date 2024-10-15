@@ -25,13 +25,11 @@ return new class extends Migration
             $table->string('tr_user_mobile', 25); // varchar(25) NOT NULL
             $table->string('tr_user_email', 50); // varchar(50) NOT NULL
             $table->string('tr_user_personal_img', 200)->nullable(); // varchar(200) DEFAULT NULL
-            $table->unsignedBigInteger('tr_user_grade'); // int NOT NULL
             $table->string('tr_user_pass', 255); // varchar(255) NOT NULL
             $table->string('tr_last_pass', 255); // varchar(255) NOT NULL
             $table->unsignedBigInteger('bimar_users_status_id')->default(1); // tinyint(1) NOT NULL DEFAULT 1
             $table->unsignedBigInteger('bimar_role_id'); // int NOT NULL
-            $table->unsignedBigInteger('bimar_training_course_id'); // int NOT NULL
-
+            $table->unsignedBigInteger('bimar_users_academic_degree_id'); // int NOT NULL
             $table->timestamp('tr_user_passchangedate')->nullable(); // timestamp DEFAULT NULL
             $table->timestamp('tr_user_lastaccess')->nullable(); // timestamp DEFAULT NULL
             $table->timestamp('tr_user_createdate')->useCurrent();
@@ -55,8 +53,8 @@ return new class extends Migration
                 $table->foreign('bimar_users_gender_id')->references('id')->on('bimar_users_genders')->cascadeOnDelete();
             }
 
-            if (Schema::hasTable('bimar_training_courses')) {
-                $table->foreign('bimar_training_course_id')->references('id')->on('bimar_training_courses')->cascadeOnDelete();
+            if (Schema::hasTable('bimar_users_academic_degrees')) {
+                $table->foreign('bimar_users_academic_degree_id')->references('id')->on('bimar_users_academic_degrees')->cascadeOnDelete();
             }
 
 
