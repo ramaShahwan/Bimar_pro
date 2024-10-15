@@ -115,7 +115,7 @@
                         <a href="error.html"><i class="fa fa-bug "></i>Error Page</a>
                     </li> -->
                     <li>
-                        <a href="{{ route('login') }}"><i class="fa fa-sign-in "></i>Login Page</a>
+                        <a href="{{ url('jj') }}"><i class="fa fa-sign-in "></i>Login Page</a>
                     </li>
                     <!-- <li>
                         <a href="#"><i class="fa fa-sitemap "></i>Multilevel Link <span class="fa arrow"></span></a>

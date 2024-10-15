@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout_admin.app')
 @section('content')
 <div class="container">
         <!-- <div class="row text-center " style="padding-top:100px;">

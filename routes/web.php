@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'admin.home')->name('home');
 Route::view('/form', 'admin.form')->name('form');
 Route::view('/table', 'admin.table')->name('table');
-Route::view('/login', 'admin.login')->name('login');
+Route::view('/jj', 'admin.jj')->name('jj');
 // Route::view('/year', 'admin.year')->name('year');
 // Route::view('/programs', 'admin.programs')->name('programs');
 Route::get('/programs',[BimarTrainingProgramController::class,'index'])-> name('programs');
