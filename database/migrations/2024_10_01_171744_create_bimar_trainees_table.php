@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('trainee_lname_ar', 100);
             $table->string('trainee_mobile', 50);
             $table->string('trainee_email', 50);
-            $table->unsignedBigInteger('trainee_gender');
             $table->unsignedBigInteger('bimar_users_status_id');
             $table->unsignedBigInteger('bimar_users_gender_id');
 
@@ -29,7 +28,6 @@ return new class extends Migration
             $table->timestamp('trainee_passchangedate')->nullable();
             $table->timestamp('trainee_createdate')->useCurrent();
             $table->timestamp('trainee_lastaccess')->nullable();
-            $table->unsignedBigInteger('trainee_status')->default(1);
 
             // $table->charset('utf8mb4');
             // $table->collation('utf8mb4_unicode_ci');

@@ -13,7 +13,7 @@ class BimarUserAcademicDegreeController extends Controller
     public function index()
     {
         $data = Bimar_User_Academic_Degree::all();
-        return view('admin.grade',compact('data'));
+        return view('admin.academic_degrees',compact('data'));
     }
 
     /**
@@ -29,11 +29,13 @@ class BimarUserAcademicDegreeController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'tr_users_degree_name_en' => 'required|unique:bimar_users_academic_degrees',
-            'tr_users_gender_name_ar' => 'required|unique:bimar_users_academic_degrees',
+            'tr_users_degree_name_ar' => 'required|unique:bimar_users_academic_degrees',
             'tr_users_degree_status' => 'required|in:0,1',
           ]);
+
 
         $data = new Bimar_User_Academic_Degree;
         $data->tr_users_degree_name_en = $request->tr_users_degree_name_en;
@@ -60,8 +62,8 @@ class BimarUserAcademicDegreeController extends Controller
     public function edit($id)
     {
         $data = Bimar_User_Academic_Degree::findOrFail($id);
-        return response()->json($data); 
-    }   
+        return response()->json($data);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -71,7 +73,7 @@ class BimarUserAcademicDegreeController extends Controller
         try {
             $validated = $request->validate([
                 'tr_users_degree_name_en' => 'required',
-                'tr_users_gender_name_ar' => 'required',
+                'tr_users_degree_name_ar' => 'required',
                 'tr_users_degree_status' => 'required|in:0,1',
             ]);
 
@@ -96,9 +98,9 @@ class BimarUserAcademicDegreeController extends Controller
         //
     }
 
-    public function updateSwitch($yearId)
+    public function updateSwitch($gradeId)
     {
-        $grade = Bimar_User_Academic_Degree::find($yearId);
+        $grade = Bimar_User_Academic_Degree::find($gradeId);
         if($grade){
             if($grade->tr_users_degree_status){
                 $grade->tr_users_degree_status =0;
