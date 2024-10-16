@@ -49,6 +49,10 @@ Route::get('/courses',[BimarTrainingCourseController::class,'index'])-> name('co
 Route::get('/training_type',[BimarTrainingTypeController::class,'index'])-> name('training_type');
 // Route::view('/course_enrollments', 'admin.course_enrollments')->name('course_enrollments');
 Route::get('/course_enrollments',[BimarCourseEnrollmentController::class,'index'])-> name('course_enrollments');
+Route::get('/role',[BimarRolesController::class,'index'])-> name('role');
+Route::get('/gender',[BimarUserGenderController::class,'index'])-> name('gender');
+Route::get('/grade',[BimarUserAcademicDegreeController::class,'index'])-> name('grade');
+Route::get('/status',[BimarUsersStatusController::class,'index'])-> name('status');
 
 Route::get('/year',[BimarTrainingYearController::class,'index'])-> name('year');
 Route::prefix('year')->controller(BimarTrainingYearController::class)->group(function(){
@@ -91,7 +95,7 @@ Route::prefix('gender')->controller(BimarUserGenderController::class)->group(fun
     Route::post('/store', 'store');
     Route::get('/edit/{id}', 'edit');
     Route::put('/update/{id}', 'update');
-    Route::get('updateSwitch/{id}','updateSwitch');
+
 });
 Route::prefix('role')->controller(BimarRolesController::class)->group(function(){
     Route::get('/index','index');
@@ -101,6 +105,11 @@ Route::prefix('role')->controller(BimarRolesController::class)->group(function()
     Route::put('/update/{id}', 'update');
     Route::get('updateSwitch/{id}','updateSwitch');
 });
+Route::get('role/{id}', [BimarRolesController::class, 'updateSwitch']);
+Route::get('gender/{id}', [BimarUserGenderController::class, 'updateSwitch']);
+Route::get('grade/{id}', [BimarUserAcademicDegreeController::class, 'updateSwitch']);
+Route::get('status/{id}', [BimarUsersStatusController::class, 'updateSwitch']);
+
 Route::prefix('grade')->controller(BimarUserAcademicDegreeController::class)->group(function(){
     Route::get('/index','index');
     Route::get('/create', 'create');
@@ -115,12 +124,12 @@ Route::get('getcourse', [BimarCourseEnrollmentController::class, 'getcourse'])->
 
 Route::post('/update-switch/{id}', [BimarTrainingYearController::class, 'updateSwitchStatus']);
 // Route::get('/getYearData/{id}', [YourController::class, 'getYearData']);
-Route::prefix('role')->controller(BimarRolesController::class)->group(function(){
+// Route::prefix('role')->controller(BimarRolesController::class)->group(function(){
 
-    Route::post('/store', 'store');
-    Route::get('/edit/{id}', 'edit');
-    Route::put('/update/{id}', 'update');
-});
+//     Route::post('/store', 'store');
+//     Route::get('/edit/{id}', 'edit');
+//     Route::put('/update/{id}', 'update');
+// });
 // Route::get('/years/edit/{tr_year_id}', [BimarTrainingYearController::class, 'edit'])->name('years.edit');
 // Route::put('/years/update/{tr_year_id}', [BimarTrainingYearController::class, 'update'])->name('years.update');
 Route::get('/years/edit/{id}', [BimarTrainingYearController::class, 'edit'])->name('years.edit');

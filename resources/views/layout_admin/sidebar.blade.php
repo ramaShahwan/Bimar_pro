@@ -104,6 +104,18 @@
                             <li>
                                 <a href="{{ route('course_enrollments') }}"><i class="fa fa-code "></i>course_enrollments</a>
                             </li>
+                            <li>
+                                <a href="{{ route('role') }}"><i class="fa fa-code "></i>roles</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('gender') }}"><i class="fa fa-code "></i>genders</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('grade') }}"><i class="fa fa-code "></i>academic_degrees</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('status') }}"><i class="fa fa-code "></i>status</a>
+                            </li>
 
 
                         </ul>

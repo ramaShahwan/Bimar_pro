@@ -262,8 +262,8 @@ body{
             <div class="col-lg-12">
                 <div class="card">
                         <div class="card-header" style="text-align: start;font-size: 20px;display: flex;justify-content: space-between;align-items: center;">
-                            <h3><i class="fa-sharp fa-solid fa-calendar-week"></i> سنوات</h3>
-                            <a href="{{url('course_enrollments/create')}}" class="bbtn">  تسجيل جديد</a>
+                            <h3><i class="fa-sharp fa-solid fa-calendar-week"></i>  المتدربين</h3>
+                            <!-- <a href="{{url('course_enrollments/create')}}" class="bbtn">  موظف جديد </a> -->
                             <!-- <button onclick="togglePopuo()" class="bbtn">اضافة سنة</button> -->
                         </div>
                     <div class="card-block">
@@ -330,7 +330,7 @@ body{
             <!-- /. PAGE INNER  -->
         </div>
 
-        
+
         <!-- /. PAGE WRAPPER  -->
     </div>
     <!-- /. WRAPPER  -->

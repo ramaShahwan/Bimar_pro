@@ -13,7 +13,7 @@ class BimarRolesController extends Controller
     public function index()
     {
         $data = Bimar_Roles::all();
-         return view('admin.role',compact('data'));
+         return view('admin.roles',compact('data'));
     }
 
     /**
@@ -61,7 +61,7 @@ class BimarRolesController extends Controller
     public function edit($id)
     {
         $data = Bimar_Roles::findOrFail($id);
-        return response()->json($data); 
+        return response()->json($data);
     }
 
     /**
@@ -74,7 +74,7 @@ class BimarRolesController extends Controller
                 'tr_role_code' => 'required',
             'tr_role_name_en' => 'required',
             'tr_role_name_ar' => 'required',
-            'tr_role_status' => 'required|in:0,1', 
+            'tr_role_status' => 'required|in:0,1',
             ]);
 
             $data = Bimar_Roles::findOrFail($id);

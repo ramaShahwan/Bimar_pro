@@ -28,7 +28,6 @@ return new class extends Migration
             $table->timestamp('trainee_passchangedate')->nullable();
             $table->timestamp('trainee_createdate')->useCurrent();
             $table->timestamp('trainee_lastaccess')->nullable();
-            $table->unsignedBigInteger('trainee_status')->default(1);
 
             // $table->charset('utf8mb4');
             // $table->collation('utf8mb4_unicode_ci');

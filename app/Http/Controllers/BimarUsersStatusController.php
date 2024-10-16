@@ -13,7 +13,7 @@ class BimarUsersStatusController extends Controller
     public function index()
     {
         $data = Bimar_Users_Status::all();
-        return view('admin.status',compact('data'));
+        return view('admin.statuses',compact('data'));
     }
 
     /**
@@ -59,7 +59,7 @@ class BimarUsersStatusController extends Controller
     public function edit($id)
     {
         $data = Bimar_Users_Status::findOrFail($id);
-        return response()->json($data); 
+        return response()->json($data);
     }
 
     /**
@@ -69,9 +69,9 @@ class BimarUsersStatusController extends Controller
     {
         try {
             $validated = $request->validate([
-                'tr_users_status_name_en' => 'required|unique:bimar_users_statuses',
-                'tr_users_status_name_ar' => 'required|unique:bimar_users_statuses',
-                'tr_users_status' => 'required|in:0,1', 
+                'tr_users_status_name_en' => 'required',
+                'tr_users_status_name_ar' => 'required',
+                'tr_users_status' => 'required|in:0,1',
             ]);
 
             $data = Bimar_Users_Status::findOrFail($id);
