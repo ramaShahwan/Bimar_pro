@@ -4,6 +4,7 @@ use App\Http\Controllers\BimarTrainingProgramController;
 use App\Http\Controllers\BimarTrainingTypeController;
 use App\Http\Controllers\BimarTrainingCourseController;
 use App\Http\Controllers\BimarCourseEnrollmentController;
+use App\Http\Controllers\BimarRolesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,8 +70,12 @@ Route::get('getcourse', [BimarCourseEnrollmentController::class, 'getcourse'])->
 
 Route::post('/update-switch/{id}', [BimarTrainingYearController::class, 'updateSwitchStatus']);
 // Route::get('/getYearData/{id}', [YourController::class, 'getYearData']);
+Route::prefix('role')->controller(BimarRolesController::class)->group(function(){
 
-
+    Route::post('/store', 'store');
+    Route::get('/edit/{id}', 'edit');
+    Route::put('/update/{id}', 'update');
+});
 // Route::get('/years/edit/{tr_year_id}', [BimarTrainingYearController::class, 'edit'])->name('years.edit');
 // Route::put('/years/update/{tr_year_id}', [BimarTrainingYearController::class, 'update'])->name('years.update');
 Route::get('/years/edit/{id}', [BimarTrainingYearController::class, 'edit'])->name('years.edit');
