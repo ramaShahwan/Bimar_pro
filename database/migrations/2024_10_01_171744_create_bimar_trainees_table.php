@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('trainee_lname_ar', 100);
             $table->string('trainee_mobile', 50);
             $table->string('trainee_email', 50);
-            $table->unsignedBigInteger('trainee_gender');
             $table->unsignedBigInteger('bimar_users_status_id');
             $table->unsignedBigInteger('bimar_users_gender_id');
 
