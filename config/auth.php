@@ -40,6 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+    
+        'trainee' => [
+            'driver' => 'session',
+            'provider' => 'trainees',
+        ],
+    
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
 
         'api' => [
             'driver' => 'jwt',
@@ -67,9 +77,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\Bimar_User::class,
         ],
-
+    
+        'trainees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Bimar_Trainee::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

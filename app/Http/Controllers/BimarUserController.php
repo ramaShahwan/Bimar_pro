@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Bimar_User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 class BimarUserController extends Controller
 {
     /**
@@ -62,4 +64,17 @@ class BimarUserController extends Controller
     {
         //
     }
+//     public function changePassword(Request $request)
+//    {
+//     $request->validate([
+//         'new_password' => ['required', 'confirmed', Rules\Password::defaults()],
+//     ]);
+
+//     $user = Auth::user();
+//     $user->tr_user_pass = Hash::make($request->new_password);
+//     $user->tr_user_passchangedate = now(); 
+//     $user->save();
+
+//     return redirect()->route('profile')->with('success', 'تم تغيير كلمة المرور بنجاح.');
+//   }
 }

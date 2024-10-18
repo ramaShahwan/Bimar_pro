@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('trainee_fname_ar', 100);
             $table->string('trainee_lname_ar', 100);
+            $table->string('trainee_fname_en', 100);
+            $table->string('trainee_lname_en', 100);
             $table->string('trainee_mobile', 50);
             $table->string('trainee_email', 50);
             $table->unsignedBigInteger('bimar_users_status_id');
@@ -32,7 +34,7 @@ return new class extends Migration
             // $table->charset('utf8mb4');
             // $table->collation('utf8mb4_unicode_ci');
 
-            $table->timestamps();
+            // $table->timestamps();
             // index
             $table->index('trainee_email');
             $table->index('trainee_mobile');

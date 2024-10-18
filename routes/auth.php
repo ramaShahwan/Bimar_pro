@@ -11,6 +11,10 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\Auth\TraineeLoginController;
+
+
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
@@ -57,3 +61,14 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+
+
+
+Route::get('/login/user', [UserLoginController::class, 'showLoginForm'])->name('user.login');
+Route::post('/login/user', [UserLoginController::class, 'login'])->name('user.login.post');
+
+Route::get('/login/trainee', [TraineeLoginController::class, 'showLoginForm'])->name('trainee.login');
+Route::post('/login/trainee', [TraineeLoginController::class, 'login'])->name('trainee.login.post');
+
+Route::post('/logout/user', [UserLoginController::class, 'logout'])->name('user.logout');
+Route::post('/logout/trainee', [TraineeLoginController::class, 'logout'])->name('trainee.logout');
