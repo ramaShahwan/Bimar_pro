@@ -2,19 +2,38 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Bimar_Trainee extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+class Bimar_Trainee extends Authenticatable
 {
-    use HasFactory;
+    // use HasFactory;
 
     protected $fillable = ['trainee_fname_ar', 'trainee_lname_ar', 'trainee_mobile', 
     'trainee_email', 'trainee_gender','bimar_users_status_id','bimar_users_gender_id',
     'trainee_address','trainee_personal_img','trainee_pass','trainee_last_pass','trainee_passchangedate',
      'trainee_createdate','trainee_lastaccess','trainee_status'];
+    //  protected $guarded = [];
     
     protected $table = 'bimar_trainees';
+    protected $primaryKey = 'id'; 
+
+
+       // تحديد اسم حقل اسم المستخدم
+       public function getAuthIdentifierName()
+       {
+           return 'trainee_mobile';
+       }
+   
+       // تحديد حقل كلمة المرور
+       public function getAuthPassword()
+       {
+           return $this->trainee_pass;
+       }
+   
+       // تعطيل تذكير التوكن إذا لم يكن موجودًا
+       public $rememberTokenName = false;
+
 
     public function Bimar_User_Gender()
     {
@@ -26,3 +45,6 @@ class Bimar_Trainee extends Model
         return $this->belongsTo(Bimar_Users_Status::class, 'bimar_users_status_id');
     }
 }
+
+
+

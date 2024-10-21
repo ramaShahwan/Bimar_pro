@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\TraineeLoginController;
 
-
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
@@ -72,3 +71,20 @@ Route::post('/login/trainee', [TraineeLoginController::class, 'login'])->name('t
 
 Route::post('/logout/user', [UserLoginController::class, 'logout'])->name('user.logout');
 Route::post('/logout/trainee', [TraineeLoginController::class, 'logout'])->name('trainee.logout');
+
+
+
+//for employee
+// Route::prefix('user')->group(function () {
+//     Route::get('/login', [UserLoginController::class, 'showLoginForm'])->name('user.login');
+//     Route::post('/login', [UserLoginController::class, 'login'])->name('user.login.submit');
+//     Route::post('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
+// });
+
+
+// for trainee
+// Route::prefix('trainee')->group(function () {
+//     Route::get('/login', [TraineeLoginController::class, 'showLoginForm'])->name('trainee.login');
+//     Route::post('/login', [TraineeLoginController::class, 'login'])->name('trainee.login.submit');
+//     Route::post('/logout', [TraineeLoginController::class, 'logout'])->name('trainee.logout');
+// });

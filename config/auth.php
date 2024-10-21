@@ -35,27 +35,37 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-    
-        'trainee' => [
-            'driver' => 'session',
-            'provider' => 'trainees',
-        ],
-    
-        'user' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
-        'api' => [
-            'driver' => 'jwt',
-            'provider' => 'users',
-        ],
+   'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+
+    'administrator' => [
+        'driver' => 'session',
+        'provider' => 'bimar_users',
+    ],
+
+    'operation_user' => [
+        'driver' => 'session',
+        'provider' => 'bimar_users',
+    ],
+
+    'trainer' => [
+        'driver' => 'session',
+        'provider' => 'bimar_users',
+    ],
+
+    'trainee' => [
+        'driver' => 'session',
+        'provider' => 'bimar_trainees',
+    ],
+
+    'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -74,21 +84,27 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Bimar_User::class,
-        ],
     
-        'trainees' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Bimar_Trainee::class,
-        ],
+'providers' => [
+    'bimar_users' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Bimar_User::class,
+    ],
+
+    'bimar_trainees' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Bimar_Trainee::class,
+    ],
+],
+
+
+        
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-    ],
+    // ],
+
 
     /*
     |--------------------------------------------------------------------------

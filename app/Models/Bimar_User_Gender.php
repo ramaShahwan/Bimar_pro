@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Bimar_User_Gender extends Model
 {
-    use HasFactory;
+    // use HasFactory;
 
     protected $fillable = ['tr_users_gender_name_en', 'tr_users_gender_name_ar', 'tr_users_status'];
 

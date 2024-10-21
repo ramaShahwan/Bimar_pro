@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Bimar_Course_Enrollment extends Model
 {
-    use HasFactory;
+    // use HasFactory;
     // protected $primaryKey = 'tr_course_enrol_id'; 
     // public $incrementing = true; 
     // protected $keyType = 'int';

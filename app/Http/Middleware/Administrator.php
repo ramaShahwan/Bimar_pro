@@ -14,12 +14,13 @@ class Administrator
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next,string $role): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()&& $role == 'administrator')
-       // Auth::->user()->hasRole == 'admin' //function istead of string 
-    {
-        return $next($request);
+        if (Auth::guard('administrator')->check()) {
+            $user = Auth::guard('administrator')->user();
+            if ($user->Bimar_Role === 'administrator') {
+                return $next($request);
+            }
         }
         return redirect('/');
     }

@@ -1,22 +1,17 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class TraineeLoginController  extends Controller
+class TraineeLoginController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
     public function showLoginForm()
     {
-        return view('auth.trainee-login'); // قم بإنشاء هذا العرض
+        return view('auth.trainee-login'); 
     }
-    
+
     public function login(Request $request)
     {
         $request->validate([
@@ -24,8 +19,13 @@ class TraineeLoginController  extends Controller
             'trainee_pass' => 'required|string',
         ]);
 
-        if (Auth::guard('trainee')->attempt(['trainee_mobile' => $request->trainee_mobile, 'trainee_pass' => $request->trainee_pass])) {
-            return redirect()->intended('dashboard');
+        $credentials = [
+            'trainee_mobile' => $request->trainee_mobile,
+            'password' => $request->trainee_pass,
+        ];
+
+        if (Auth::guard('trainee')->attempt($credentials)) {
+            return redirect()->intended('trainee.dashboard');
         }
 
         return back()->withErrors(['trainee_mobile' => 'تم إدخال بيانات غير صحيحة.']);
@@ -34,6 +34,7 @@ class TraineeLoginController  extends Controller
     public function logout(Request $request)
     {
         Auth::guard('trainee')->logout();
-        return redirect()->route('trainee.login');
+        $request->session()->invalidate();
+        return redirect('/'); // أو أي مسار مناسب
     }
 }

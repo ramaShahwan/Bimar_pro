@@ -5,7 +5,7 @@ use App\Http\Controllers\BimarTrainingTypeController;
 use App\Http\Controllers\BimarTrainingCourseController;
 use App\Http\Controllers\BimarCourseEnrollmentController;
 
-
+use App\Http\Controllers\BimarUserController;
 use App\Http\Controllers\BimarRolesController;
 use App\Http\Controllers\BimarUserAcademicDegreeController;
 use App\Http\Controllers\BimarUserGenderController;
@@ -146,5 +146,27 @@ Route::get('course_enrollments/{id}', [BimarCourseEnrollmentController::class, '
 Route::get('course_enrollments/show/{id}', [BimarCourseEnrollmentController::class, 'show']);
 // Route::get('/course/edit/{tr_course_id}', [BimarTrainingCourseController::class, 'edit'])->name('course.edit');
 // Route::post('/course/update/{tr_course_id}', [BimarTrainingCourseController::class, 'update'])->name('course.update');
+
+
+//for admin with auth
+// Route::middleware(['auth:administrator', 'administrator'])->group(function () {
+//     Route::get('/administrator/dashboard', [BimarUserController::class, 'dashboard'])->name('administrator.dashboard');
+// });
+
+//for operation_user with auth
+// Route::middleware(['auth:operation_user', 'operation_user'])->group(function () {
+//     Route::get('/operation_user/dashboard', [BimarUserController::class, 'dashboard'])->name('operation_user.dashboard');
+// });
+
+//for trainer with auth
+// Route::middleware(['auth:trainer', 'trainer'])->group(function () {
+//     Route::get('/trainer/dashboard', [BimarUserController::class, 'dashboard'])->name('trainer.dashboard');
+// });
+
+//for trainee with auth
+// Route::middleware(['auth:trainee', 'trainee'])->group(function () {
+//     Route::get('/trainee/dashboard', [BimarUserController::class, 'dashboard'])->name('trainee.dashboard');
+// });
+
 
 require __DIR__.'/auth.php';
