@@ -15,7 +15,7 @@ class BimarTrainingCourseController extends Controller
     public function index()
     {
         $data = Bimar_Training_Course::all();
-        $programs = Bimar_Training_Program::all();
+        $programs = Bimar_Training_Program::where('tr_program_status','1')->get();
         return view('admin.courses',compact('data','programs'));
     }
 
@@ -80,7 +80,7 @@ class BimarTrainingCourseController extends Controller
     public function edit($id)
     {
         $data = Bimar_Training_Course::find($id);
-        $programs = Bimar_Training_Program::all();
+        $programs = Bimar_Training_Program::where('tr_program_status','1')->get();
         return view('admin.updatecourse', compact('data','programs'));
         // if (!$course) {
         //     return response()->json(['error' => 'Course not found'], 404);

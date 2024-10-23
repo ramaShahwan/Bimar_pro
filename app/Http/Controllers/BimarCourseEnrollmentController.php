@@ -12,7 +12,6 @@ use App\Models\Bimar_Training_Course;
 use Illuminate\Support\Facades\DB;
 class BimarCourseEnrollmentController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -27,15 +26,16 @@ class BimarCourseEnrollmentController extends Controller
      */
     public function create()
     {
-        $years = Bimar_Training_Year::all();
-        $programs = Bimar_Training_Program::all();
-        $types = Bimar_Training_Type::all();
+        $types = Bimar_Training_Type::where('tr_course_enrol_status','1')->get();
+        $years = Bimar_Training_Year::where('tr_year_status','1')->get();
+        $programs = Bimar_Training_Program::where('tr_program_status','1')->get(); 
         return view('admin.addcourse_enrollments')->with(['years' => $years,'programs'=> $programs,'types'=> $types]);
     }
     public function getcourse(Request $request)
     {
         $courses = DB::table('bimar_training_courses')
             ->where('bimar_training_program_id', $request->bimar_training_program_id)
+            ->where('tr_course_status','1')
             ->get(['id as id', 'tr_course_name_ar as name']);
 
         return response()->json($courses);
@@ -100,10 +100,10 @@ class BimarCourseEnrollmentController extends Controller
      */
     public function edit($id)
     {
-        $data = Bimar_Course_Enrollment::findOrFail($id); // تحميل بيانات التسجيل الحالية
-        $types = Bimar_Training_Type::all();
-        $years = Bimar_Training_Year::all();
-        $programs = Bimar_Training_Program::all(); // جميع البرامج المتاحة
+        $data = Bimar_Course_Enrollment::findOrFail($id); 
+        $types = Bimar_Training_Type::where('tr_course_enrol_status','1')->get();
+        $years = Bimar_Training_Year::where('tr_year_status','1')->get();
+        $programs = Bimar_Training_Program::where('tr_program_status','1')->get(); 
 
         // الحصول على البرنامج والكورس المرتبطين بالسجل
         $my_program = Bimar_Training_Program::find($data->bimar_training_program_id);
@@ -111,10 +111,6 @@ class BimarCourseEnrollmentController extends Controller
 
         return view('admin.updatecourse_enr', compact('data', 'types', 'years', 'programs', 'my_program', 'my_course'));
     }
-
-
-
-
 
     /**
      * Update the specified resource in storage.

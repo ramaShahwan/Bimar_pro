@@ -98,10 +98,10 @@ class BimarUserController extends Controller
     public function edit($id)
     {
         $data = Bimar_User::findOrFail($id); 
-        $gender = Bimar_User_Gender::all();
-        $grade = Bimar_User_Academic_Degree::all();
-        $role = Bimar_Roles::all(); 
-        $status = Bimar_Users_Status::all(); 
+        $gender = Bimar_User_Gender::where('tr_users_status','1')->get();
+        $grade = Bimar_User_Academic_Degree::where('tr_users_degree_status','1')->get();
+        $role = Bimar_Roles::where('tr_role_status','1')->get();
+        $status = Bimar_Users_Status::where('tr_users_status','1')->get();
 
         return view('admin.updateuser', compact('data', 'gender', 'grade', 'role', 'status'));
     }
