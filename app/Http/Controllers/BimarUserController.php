@@ -51,19 +51,22 @@ class BimarUserController extends Controller
             $randomPassword = PasswordGenerator::generate(12);
             $data = Bimar_User::create([
                 'tr_user_name' =>$request->tr_user_name,
-                'trainee_fname_ar' => $request->trainee_fname_ar,
-                'trainee_lname_ar' => $request->trainee_lname_ar,
-                'trainee_fname_en' => $request->trainee_fname_en,
-                'trainee_lname_en' => $request->trainee_lname_en,
+                'tr_user_fname_en' => $request->tr_user_fname_en,
+                'tr_user_lname_en' => $request->tr_user_lname_en,
+                'tr_user_fname_ar' => $request->tr_user_fname_ar,
+                'tr_user_lname_ar' => $request->tr_user_lname_ar,
                 'tr_user_mobile' => $request->tr_user_mobile,
                 'tr_user_phone'=>$request->tr_user_phone,
                 'tr_user_email' => $request->tr_user_email,
-                'bimar_users_status_id' => $request->bimar_users_status_id,
+                'bimar_users_status_id' => '1',
                 'tr_user_address' => $request->tr_user_address,
                 'bimar_users_gender_id' => $request->bimar_users_gender_id,
                 'bimar_users_academic_degree_id'=> $request->bimar_users_academic_degree_id,
                 'bimar_role_id'=> $request->bimar_role_id,
                 'tr_user_pass' => Hash::make($randomPassword),
+                'tr_last_pass'=>null,
+                'tr_user_lastaccess'=>null,
+
             ]);
     
                 // store image
@@ -75,7 +78,7 @@ class BimarUserController extends Controller
                     $data->tr_user_personal_img = $newImageName;
                     $data->update();
                 }
-            return redirect()->route('login')->with('success',($randomPassword), ' تم إنشاء الحساب بنجاح. وهذه هي كلمة المرور .');;
+            return redirect()->route('admin.addemp')->with('success',($randomPassword), ' تم إنشاء الحساب بنجاح. وهذه هي كلمة المرور .');;
        
     }
 
@@ -110,22 +113,22 @@ class BimarUserController extends Controller
     {
         try {
             $validated = $request->validate([
-                'tr_user_name' => 'required|unistring|max:50|que:bimar_users',
+                'tr_user_name' => 'required|unistring|max:50',
                 'tr_user_fname_en' => 'required|string|max:100',
                 'tr_user_lname_en' => 'required|string|max:100',
                 'tr_user_fname_ar' => 'required|string|max:100',
                 'tr_user_lname_ar' => 'required|string|max:100',
                 'tr_user_mobile' => 'required|string|max:50',
-                'tr_user_email' => 'required|string|email|max:50|unique:bimar_users',
+                'tr_user_email' => 'required|string|email|max:50',
                 // 'tr_user_pass' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
 
             $data = Bimar_User::findOrFail($id);
             $data->tr_user_name = $request->tr_user_name;
-            $data->trainee_fname_ar = $request->trainee_fname_ar;
-            $data->trainee_lname_ar = $request->trainee_lname_ar;
-            $data->trainee_fname_en = $request->trainee_fname_en;
-            $data->trainee_lname_en = $request->trainee_lname_en;
+            $data->tr_user_fname_en = $request->tr_user_fname_en;
+            $data->tr_user_lname_en = $request->tr_user_lname_en;
+            $data->tr_user_fname_ar = $request->tr_user_fname_ar;
+            $data->tr_user_lname_ar = $request->tr_user_lname_ar;
             $data->tr_user_mobile = $request->tr_user_mobile;
             $data->tr_user_phone = $request->tr_user_phone;
             $data->tr_user_email = $request->tr_user_email;
@@ -160,17 +163,20 @@ class BimarUserController extends Controller
     {
         //
     }
-//     public function changePassword(Request $request)
-//    {
-//     $request->validate([
-//         'new_password' => ['required', 'confirmed', Rules\Password::defaults()],
-//     ]);
 
-//     $user = Auth::user();
-//     $user->tr_user_pass = Hash::make($request->new_password);
-//     $user->tr_user_passchangedate = now(); 
-//     $user->save();
+    public function changePassword($id)
+   {
+    $user = Bimar_User::findOrFail($id);
 
-//     return redirect()->route('profile')->with('success', 'تم تغيير كلمة المرور بنجاح.');
-//   }
+    $randomPassword = PasswordGenerator::generate(12);
+   
+    $old_password =  $user->tr_user_pass;
+    $user->tr_last_pass =  $old_password;
+    // $user = Auth::user();
+    $user->tr_user_pass = Hash::make($randomPassword);
+    $user->tr_user_passchangedate = now(); 
+    $user->save();
+
+    return redirect()->route('admin.changepass')->with(($randomPassword) ,'تم تعديل كلمة المرور بنجاح وهذه هي كلمة المرور الجديدة ');
+  }
 }

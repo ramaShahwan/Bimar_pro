@@ -9,10 +9,10 @@ class Bimar_Trainee extends Authenticatable
 {
     // use HasFactory;
 
-    protected $fillable = ['trainee_fname_ar', 'trainee_lname_ar', 'trainee_mobile', 
-    'trainee_email', 'trainee_gender','bimar_users_status_id','bimar_users_gender_id',
+    protected $fillable = ['trainee_fname_ar', 'trainee_lname_ar','trainee_fname_en','trainee_lname_en',
+     'trainee_mobile','trainee_email','bimar_users_status_id','bimar_users_gender_id',
     'trainee_address','trainee_personal_img','trainee_pass','trainee_last_pass','trainee_passchangedate',
-     'trainee_createdate','trainee_lastaccess','trainee_status'];
+     'trainee_createdate','trainee_lastaccess'];
     //  protected $guarded = [];
     
     protected $table = 'bimar_trainees';
